@@ -12,8 +12,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/wasteform" element={<Wasteform/>} />  
+        <Route path="/register" element={<Register />} />
+        <Route path="/wasteform" element={<Wasteform />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </BrowserRouter>
