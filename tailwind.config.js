@@ -14,8 +14,8 @@ module.exports = {
       colors: {
         brown: {
           50: '#fdf8f6',
-          500: '#795548', // Marrón estándar
-          900: '#3e2723', // Marrón muy oscuro
+          500: '#795548',
+          900: '#3e2723',
         },
       },
     },

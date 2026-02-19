@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../css/WasteForm.css';
+import '../css/Wasteform.css';
 
 // --- Datos mock ---
 const RESIDUOS_MOCK = [

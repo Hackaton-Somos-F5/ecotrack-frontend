@@ -41,20 +41,29 @@ EcoCole busca crear una **cultura ambiental desde edades tempranas** mediante:
 ```bash
 📦 src
  ┣ 📂 assets
+ ┃  ┗ logoSinFondo.png
  ┣ 📂 components
- ┃ ┣ 📂 css
- ┃ ┃ ┣ 🎨 Home.css
- ┃ ┃ ┗ 📂 footer
- ┃ ┣ 📂 header
- ┃ ┣ 📂 footer
- ┃ ┗ 📂 pages
- ┃ ┃ ┣ 📄 Dashboard.jsx
- ┃ ┃ ┣ 📄 Home.jsx
- ┃ ┃ ┗ 📄 Register.jsx
+ ┃ ┃ ┣ 📂 footer
+ ┃ ┃    ┣ Footer.css
+ ┃ ┃    ┗ Footer.jsx        
+ ┃ ┃ ┣ 📂 header
+ ┃ ┃    ┣ Header.css
+ ┃ ┃    ┗ Header.jsx 
+ ┣ 📂 css
+ ┃   ┣ Dashboard.css
+ ┃   ┣ Home.css
+ ┃   ┣ Register.css
+ ┃   ┗ Wasteform.css
+ ┣ 📂 data
+ ┃  ┗ categories.js
+ ┣ 📂 pages
+ ┃  ┣ 📄 Dashboard.jsx
+ ┃  ┣ 📄 Home.jsx
+ ┃  ┣ 📄 Register.jsx
+ ┃  ┗ 📄 Wasteform.jsx
  ┣ 📂 services
- ┃ ┗ 🔌 api.js
- ┣ 📂 img
- ┃ ┗ 🖼 logoSinFondo.png
+ ┃  ┗ 🔌 api.js
+ ┣  App.css
  ┣ ⚛ App.jsx
  ┣ 🚀 main.jsx
  ┗ 🎨 index.css
@@ -75,15 +84,13 @@ EcoCole busca crear una **cultura ambiental desde edades tempranas** mediante:
 
 ## 🔌 **Backend (en desarrollo)**
 
-El backend está siendo desarrollado actualmente por el equipo y permitirá:
+El backend permite:
 
 * 🏫 Registro de colegios
 * 👤 Gestión de usuarios
 * ♻️ Registro de residuos
 * 📊 Métricas de reciclaje
 * 📋 Panel de control
-
-Cuando esté disponible se añadirá documentación de endpoints y configuración.
 
 ---
 
@@ -114,26 +121,33 @@ GitHub: [https://github.com/webermuros1-oss](https://github.com/webermuros1-oss)
 LinkedIn: [https://www.linkedin.com/in/heber-paris-caama%C3%B1o/](https://www.linkedin.com/in/heber-paris-caama%C3%B1o/)
 
 **Geraldine Saco**
+GitHub: [https://github.com/GeraldineSaco](https://github.com/GeraldineSaco)<br>
+LinkedIn: [https://www.linkedin.com/in/geraldine-saco](https://www.linkedin.com/in/geraldine-saco)
 
 **Lorena Da Silva Ferreira**<br>
 GitHub: [https://github.com/lorenasferreira](https://github.com/lorenasferreira)<br>
 LinkedIn: [https://www.linkedin.com/in/lorenasferreira](https://www.linkedin.com/in/lorenasferreira)
 
+**Kevin Gerardo Ruiz Gutierrez**
+GitHub: [https://github.com/Kevingedev](https://github.com/kevingedev)<br>
+LinkedIn: [https://www.linkedin.com/in/kevinruizgutierrez](https://www.linkedin.com/in/kevinruizgutierrez)
+
+
 **Germán Illan Puertas**
 
 **Santiago Patiño Torres**
 
-**Kevin Gerardo Ruiz Gutierrez**
+
 
 ---
 
 ## 📈 **Futuras mejoras**
 
 * 🔐 Sistema de autenticación
-* 📊 Dashboard con estadísticas
+* 📊 Dashboard con más estadísticas
 * 🌿 Sistema de puntos ecológicos
 * ⚙️ Panel de administración
-* 🔗 Integración con API real
+* 🔗 Gestión de usuarios  (administradores, profesores, personal de mantenimiento)
 
 ---
 
