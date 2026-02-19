@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import '../css/Dashboard.css';
 import { useAuth } from "../context/AuthContext";
 import api from '../services/api';
+import WasteModal from '../components/WasteModal';
+import { useNavigate } from 'react-router-dom';
 
 function WasteCard({ code, label, percentage, icon, color, bg }) {
     const isHigh = percentage >= 75;
@@ -86,67 +88,69 @@ function NextPickupCard() {
     );
 }
 
-function BottomControls() {
+function BottomControls({ onAddClick, onHistoryClick }) {
     return (
         <div className="bottomControls">
-            <button className="bottomBtn bottomBtnPrimary">➕ Añadir residuo</button>
-            <button className="bottomBtn bottomBtnSecondary">📋 Ver historial</button>
+            <button className="bottomBtn bottomBtnPrimary glassEffect" onClick={onAddClick}>
+                <span className="btnIcon">➕</span> Añadir residuo
+            </button>
+            <button className="bottomBtn bottomBtnSecondary glassEffect" onClick={onHistoryClick}>
+                <span className="btnIcon">📋</span> Ver historial
+            </button>
         </div>
     );
 }
 
 export default function Dashboard() {
     const { user } = useAuth();
+    const navigate = useNavigate();
     const [wasteTypes, setWasteTypes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [totalKg, setTotalKg] = useState(0);
+    const [modalAbierto, setModalAbierto] = useState(false);
+
+    const fetchData = async () => {
+        if (!user?.id) return;
+
+        try {
+            setLoading(true);
+            const [cats, res] = await Promise.all([
+                api.categorias.getAll(),
+                api.residuos.getByColegio(user.id)
+            ]);
+
+            const calculatedWaste = cats.map(cat => {
+                const totalCat = res
+                    .filter(r => r.categoria_id === cat.id)
+                    .reduce((sum, r) => sum + (r.peso_kg || 0), 0);
+
+                const percentage = cat.umbral > 0 ? Math.round((totalCat / cat.umbral) * 100) : 0;
+
+                return {
+                    id: cat.id,
+                    code: cat.code,
+                    label: cat.label,
+                    icon: cat.icon,
+                    color: cat.color,
+                    bg: cat.bg,
+                    percentage: percentage,
+                    total: totalCat
+                };
+            });
+
+            setWasteTypes(calculatedWaste);
+            setTotalKg(res.reduce((sum, r) => sum + (r.peso_kg || 0), 0));
+            setError(null);
+        } catch (err) {
+            console.error("Error cargando datos del dashboard:", err);
+            setError("No se pudieron cargar los datos del dashboard.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (!user?.id) return;
-
-            try {
-                setLoading(true);
-                // Cargar categorías y residuos en paralelo
-                const [cats, res] = await Promise.all([
-                    api.categorias.getAll(),
-                    api.residuos.getByColegio(user.id)
-                ]);
-
-                // Calcular porcentajes y agrupar datos
-                const calculatedWaste = cats.map(cat => {
-                    // Filtrar residuos de esta categoría y sumarlos
-                    const totalCat = res
-                        .filter(r => r.categoria_id === cat.id)
-                        .reduce((sum, r) => sum + (r.peso_kg || 0), 0);
-
-                    // Porcentaje = (total / umbral) * 100
-                    const percentage = cat.umbral > 0 ? Math.round((totalCat / cat.umbral) * 100) : 0;
-
-                    return {
-                        id: cat.id,
-                        code: cat.code,
-                        label: cat.label,
-                        icon: cat.icon,
-                        color: cat.color,
-                        bg: cat.bg,
-                        percentage: percentage,
-                        total: totalCat
-                    };
-                });
-
-                setWasteTypes(calculatedWaste);
-                setTotalKg(res.reduce((sum, r) => sum + (r.peso_kg || 0), 0));
-                setError(null);
-            } catch (err) {
-                console.error("Error cargando datos del dashboard:", err);
-                setError("No se pudieron cargar los datos del dashboard.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchData();
     }, [user?.id]);
 
@@ -186,7 +190,15 @@ export default function Dashboard() {
 
                 <ServiceSection />
                 <NextPickupCard />
-                <BottomControls />
+                <BottomControls
+                    onAddClick={() => setModalAbierto(true)}
+                    onHistoryClick={() => navigate('/wasteform')}
+                />
+                <WasteModal
+                    isOpen={modalAbierto}
+                    onClose={() => setModalAbierto(false)}
+                    onSuccess={fetchData}
+                />
             </main>
         </div>
     );

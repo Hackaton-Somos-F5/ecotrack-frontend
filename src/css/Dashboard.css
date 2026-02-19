@@ -354,42 +354,56 @@
 /* ---- BOTTOM CONTROLS ---- */
 .bottomControls {
     display: flex;
-    gap: 12px;
+    gap: 16px;
+    margin-top: 10px;
 }
 
 .bottomBtn {
     flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    font-size: 0.95rem;
+    padding: 16px 24px;
+    border-radius: 16px;
+    font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     font-family: inherit;
-    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btnIcon {
+    font-size: 1.2rem;
 }
 
 .bottomBtnPrimary {
-    background: #2ecc71;
+    background: rgba(46, 204, 113, 0.85) !important;
     color: white;
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+    border: 1px solid rgba(46, 204, 113, 0.3) !important;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.2);
 }
 
 .bottomBtnPrimary:hover {
-    background: #27ae60;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(46, 204, 113, 0.4);
+    background: rgba(46, 204, 113, 1) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
 }
 
 .bottomBtnSecondary {
-    background: white;
+    background: rgba(255, 255, 255, 0.4) !important;
     color: #374151;
-    border: 1.5px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 
 .bottomBtnSecondary:hover {
-    background: #f9fafb;
-    border-color: #d1d5db;
+    background: rgba(255, 255, 255, 0.6) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(31, 38, 135, 0.1);
+}
+
+.bottomBtn:active {
+    transform: translateY(0);
 }
 
 /* ============================================
