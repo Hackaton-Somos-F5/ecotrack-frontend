@@ -6,7 +6,6 @@
     align-items: center;
     justify-content: space-between;
 
-    /* Ancho completo garantizado */
     width: 100%;
     min-width: 0;
     margin: 0;
@@ -17,8 +16,12 @@
     border-bottom: 2px solid #4A9EE0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 
-    /* Evita que los hijos lo expandan fuera */
-    overflow: hidden;
+    /* Necesario para que el dropdown quede por encima de la página */
+    position: relative;
+    z-index: 100;
+
+    /* visible para no recortar el dropdown */
+    overflow: visible;
 }
 
 
@@ -128,6 +131,8 @@
     align-items: center;
     gap: 16px;
     flex-shrink: 0;
+    overflow: visible;
+    position: relative;
 }
 
 /* Botón campana */
@@ -260,4 +265,114 @@
     .headerLogoName {
         font-size: 1rem;
     }
+}
+
+/* ============================================
+   DROPDOWN MENU
+   ============================================ */
+.avatarWrapper {
+    position: relative;
+}
+
+.avatarActive {
+    outline: 2px solid #2ecc71;
+    outline-offset: 2px;
+    border-radius: 50%;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 220px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08);
+    border: 1.5px solid #e5e7eb;
+    overflow: hidden;
+    z-index: 200;
+    animation: dropIn 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: top right;
+}
+
+@keyframes dropIn {
+    from { opacity: 0; transform: scale(0.92) translateY(-6px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* Cabecera usuario */
+.dropdownUser {
+    padding: 14px 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dropdownUserName {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.dropdownUserRole {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+/* Divisor */
+.dropdownDivider {
+    height: 1px;
+    background: #f3f4f6;
+    margin: 0;
+}
+
+/* Etiqueta de sección */
+.dropdownSection {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    padding: 10px 16px 4px;
+}
+
+/* Items */
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+}
+
+.dropdownItem:hover {
+    background: #f0fdf4;
+    color: #16a34a;
+}
+
+.dropdownItemIcon {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Logout */
+.dropdownLogout {
+    color: #ef4444;
+    margin-bottom: 4px;
+}
+
+.dropdownLogout:hover {
+    background: #fef2f2;
+    color: #dc2626;
 }
