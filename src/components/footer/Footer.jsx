@@ -10,7 +10,7 @@ export default function Footer() {
                     <div className="footerCircle">
                         <div className="footerCircleOverlay" />
                         <img
-                            src="/src/img/logoSinFondo.png"
+                            src="./src/assets/logoSinFondo.png"
                             alt="EcoCole Logo"
                             className="footerLogoImage"
                         />

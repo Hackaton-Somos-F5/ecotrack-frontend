@@ -27,7 +27,7 @@ export default function Header({ userName = "Usuario", notificaciones = 1 }) {
             <Link to="/" className="headerLogo">
                 <div className="headerLogoCircle">
                     <div className="circleOverlay" />
-                    <img src="/src/img/logoSinFondo.png" alt="EcoCole Logo" className="logoImage" />
+                    <img src="./src/assets/logoSinFondo.png" alt="EcoCole Logo" className="logoImage" />
                 </div>
                 <div className="headerLogoText">
                     <span className="headerLogoName">ECO<strong>COLE</strong></span>
