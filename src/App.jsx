@@ -3,7 +3,6 @@ import Header from "./components/header/Header.jsx";
 import Home from "./components/pages/Home.jsx";
 import Footer from './components/footer/Footer.jsx';
 import Dashboard from './components/pages/Dashboard.jsx';
-import Footer from './components/footer/Footer.jsx';
 import Register from './components/pages/Register.jsx';
 import Wasteform from './components/pages/Wasteform.jsx';
 
