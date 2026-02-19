@@ -1,4 +1,4 @@
-/* === HOME CSS - BLANCO MARFIL MINIMALISTA RESPONSIVE === */
+/* === HOME CSS - FULL WIDTH HERO CENTRADO === */
 * {
     margin: 0;
     padding: 0;
@@ -10,15 +10,13 @@ body {
     line-height: 1.6;
     color: #111827;
     background: #FAF9F6;
-    /* ← BLANCO MARFIL */
+    overflow-x: hidden;
 }
 
 /* === VARIABLES === */
 :root {
     --ivory: #FAF9F6;
-    /* Fondo principal marfil */
     --white-pure: #FFFFFF;
-    /* Cards blancas puras */
     --black: #111827;
     --gray-dark: #374151;
     --gray-light: #9ca3af;
@@ -29,19 +27,21 @@ body {
 .pageWrapper {
     min-height: 100vh;
     background: var(--ivory);
+    width: 100%;
 }
 
-.container {
+/* CONTENIDO INTERNO - MAX ANCHO LEGIBLE */
+.contentWrapper {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    /* ← PADDING REDUCIDO */
+    width: 100%;
 }
 
 .section {
     padding: 60px 0;
-    /* ← PADDING REDUCIDO 40% */
     background: var(--ivory);
+    width: 100%;
 }
 
 /* Labels y títulos */
@@ -51,7 +51,6 @@ body {
     font-size: 0.85rem;
     font-weight: 600;
     padding: 6px 16px;
-    /* ← MÁS COMPACTO */
     border: 2px solid #f1f1f1;
     border-radius: 20px;
     text-transform: uppercase;
@@ -75,16 +74,18 @@ body {
     line-height: 1.7;
 }
 
-/* === HERO === */
+/* === HERO FULL WIDTH CENTRADO === */
 .hero {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
     background: #439b31;
     position: relative;
     overflow: hidden;
-    padding: 80px 20px;
-    /* ← RESPONSIVE */
+    padding: 80px 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .heroBgCircle {
@@ -98,10 +99,22 @@ body {
     z-index: 1;
 }
 
-.heroContent {
-    max-width: 600px;
+/* WRAPPER INTERNO HERO - PERFECTAMENTE CENTRADO */
+.heroInner {
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
     position: relative;
     z-index: 2;
+}
+
+.heroContent {
+    max-width: 600px;
     flex: 1;
     color: white;
 }
@@ -171,16 +184,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    z-index: 2;
+    max-width: 400px;
 }
 
 .heroLogo {
     max-width: 320px;
     height: auto;
+    width: 100%;
 }
 
-/* === SECCIONES BLANCAS PLANAS === */
+/* === SECCIONES BLANCAS === */
 .sectionWho {
     background: var(--ivory);
     text-align: center;
@@ -202,7 +215,6 @@ body {
     border: 2px solid #f8f9fa;
     border-radius: var(--radius-lg);
     padding: 40px 28px;
-    /* ← REDUCIDO */
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
@@ -251,7 +263,6 @@ body {
     border: 2px solid #f8f9fa;
     border-radius: var(--radius-lg);
     padding: 40px 24px;
-    /* ← REDUCIDO */
     text-align: center;
     position: relative;
     transition: all 0.3s ease;
@@ -300,12 +311,14 @@ body {
     line-height: 1.7;
 }
 
-/* === CTA FINAL === */
+/* === CTA FINAL FULL WIDTH === */
 .sectionCta {
     background: linear-gradient(135deg, #439b31 0%, #2e7d23 100%);
     color: white;
     text-align: center;
-    padding: 80px 20px;
+    padding: 80px 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
 }
 
 .sectionCta .sectionLabel {
@@ -322,83 +335,36 @@ body {
     color: rgba(255, 255, 255, 0.95);
 }
 
-/* === FOOTER === */
-.footer {
-    background: var(--black);
-    color: white;
-    padding: 48px 0 24px;
-}
-
-.footerInner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 32px;
-}
-
-.footerLogo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 1.3rem;
-    font-weight: 800;
-}
-
-.logoIcon {
-    font-size: 2rem;
-}
-
-.footerLinks {
-    display: flex;
-    gap: 24px;
-}
-
-.footerLinks a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-.footerLinks a:hover {
-    color: #60A5FA;
-}
-
-.footerCopy {
-    margin-top: 32px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.85rem;
-    width: 100%;
-}
-
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
-    .container {
+    .contentWrapper {
         padding: 0 16px;
     }
 
     .section {
         padding: 48px 0;
-        /* ← MÁS COMPACTO MÓVIL */
     }
 
+    /* HERO MÓVIL CENTRADO */
     .hero {
+        padding: 60px 0;
+        flex-direction: column;
+    }
+
+    .heroInner {
         flex-direction: column;
         text-align: center;
-        padding: 60px 16px;
+        gap: 40px;
+        padding: 0 16px;
     }
 
     .heroContent {
-        padding-right: 0;
         order: 2;
-        margin-top: 32px;
+        width: 100%;
     }
 
     .heroVisual {
         order: 1;
-        margin-bottom: 32px;
     }
 
     .heroLogo {
@@ -417,16 +383,6 @@ body {
     .pasosGrid {
         grid-template-columns: 1fr;
         gap: 24px;
-    }
-
-    .pasoCard,
-    .misionCard {
-        padding: 32px 20px;
-    }
-
-    .footerInner {
-        flex-direction: column;
-        text-align: center;
     }
 }
 
@@ -448,5 +404,9 @@ body {
         font-size: 1rem;
         top: 16px;
         right: 16px;
+    }
+
+    .heroInner {
+        gap: 32px;
     }
 }
