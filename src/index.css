@@ -1,3 +1,4 @@
+* {
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
 /* === RESET GLOBAL === */
@@ -8,6 +9,25 @@
 }
 
 :root {
+  --font-primary: "Inter", sans-serif;
+
+  --color-primary: #00d23f;
+  --color-primary-hover: #00b837;
+
+  --color-background: #f4f6f4;
+  --color-surface: #ffffff;
+
+  --color-text-primary: #1d2b1f;
+  --color-text-secondary: #6b6f6b;
+
+  --color-error: #e53935;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-background);
+  min-height: 100vh;
+  color: var(--color-text-primary);
   --green-primary: #2ECC71;
   --green-dark: #1a8a4a;
   --green-light: #d4f5e4;
@@ -75,4 +95,4 @@ input, select, textarea {
 ::-webkit-scrollbar-thumb {
   background: var(--green-primary);
   border-radius: 3px;
-}
+}}
