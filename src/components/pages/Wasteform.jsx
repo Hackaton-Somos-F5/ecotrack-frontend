@@ -298,8 +298,7 @@ export default function Residuos() {
             {/* Top bar */}
             <div className="residuosTopBar">
                 <button className="backBtn" onClick={() => window.history.back()}>←</button>
-                <h1 className="residuosTitle">Eco Cole</h1>
-                <button className="profileBtn">👤</button>
+                
             </div>
 
             {/* Buscador */}

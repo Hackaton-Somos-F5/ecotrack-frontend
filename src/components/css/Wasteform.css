@@ -1,12 +1,13 @@
 /* === RESIDUOS PAGE === */
 .residuosPage {
     min-height: 100vh;
-    background: #f4f8f5;
+    background:#439b31 ;
     font-family: 'Inter', system-ui, sans-serif;
     max-width: 480px;
     margin: 0 auto;
     position: relative;
     padding-bottom: 100px;
+    padding-top: 20px;
 }
 
 /* Top bar */
@@ -14,11 +15,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 20px 12px;
+    padding: 12px 20px;
     background: #f4f8f5;
     position: sticky;
     top: 0;
     z-index: 10;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .backBtn {
