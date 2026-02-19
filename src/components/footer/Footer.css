@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-/* Mismo padding lateral que el header (28px) */
+/* CONTENEDOR */
 .footerInner {
     display: flex;
     justify-content: space-between;
@@ -19,7 +19,7 @@
     box-sizing: border-box;
 }
 
-/* Logo igual que el header */
+/* LOGO */
 .footerLogo {
     display: flex;
     align-items: center;
@@ -27,13 +27,7 @@
     flex-shrink: 0;
 }
 
-.logoContainer {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-/* Círculo animado igual que el header */
+/* CÍRCULO LOGO */
 .footerCircle {
     width: 72px;
     height: 72px;
@@ -54,7 +48,7 @@
     );
     border-radius: 50%;
     z-index: 1;
-    animation: rotateFooter 20s linear infinite;
+    animation: rotateFooter 25s linear infinite;
 }
 
 @keyframes rotateFooter {
@@ -65,10 +59,7 @@
 .footerCircleOverlay::before {
     content: '';
     position: absolute;
-    top: 3px;
-    left: 3px;
-    right: 3px;
-    bottom: 3px;
+    inset: 3px;
     background: #f4f8f5;
     border-radius: 50%;
     z-index: 2;
@@ -85,7 +76,7 @@
     z-index: 3;
 }
 
-/* Texto logo igual que el header */
+/* TEXTO LOGO */
 .footerLogoText {
     display: flex;
     flex-direction: column;
@@ -117,42 +108,47 @@
     letter-spacing: 0.03em;
 }
 
-/* Links centrales */
+/* LINKS */
 .footerLinks {
     display: flex;
-    gap: 24px;
+    gap: 28px;
     align-items: center;
+    justify-content: center;
 }
 
-.footerLinks a {
+/* texto clicable */
+.footerLinks span {
     color: #374151;
-    text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
+    cursor: pointer;
     position: relative;
-    transition: color 0.2s ease;
+    transition: color 0.25s ease;
 }
 
-.footerLinks a:hover {
+/* hover color */
+.footerLinks span:hover {
     color: #11742a;
 }
 
-.footerLinks a::after {
+/* línea animada moderna */
+.footerLinks span::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 0;
+    left: 50%;
+    bottom: -5px;
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, #439b31, #11742a);
-    transition: width 0.2s ease;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
 }
 
-.footerLinks a:hover::after {
+.footerLinks span:hover::after {
     width: 100%;
 }
 
-/* Copyright */
+/* COPYRIGHT */
 .footerCopy {
     color: #6b7280;
     font-size: 0.85rem;
@@ -160,19 +156,21 @@
     flex-shrink: 0;
 }
 
-/* Responsive */
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 768px) {
     .footerInner {
         flex-direction: column;
         text-align: center;
-        gap: 20px;
+        gap: 22px;
         padding: 18px 16px;
     }
 
     .footerLinks {
         gap: 20px;
         flex-wrap: wrap;
-        justify-content: center;
     }
 
     .footerCopy {
@@ -199,5 +197,9 @@
 
     .logoText {
         font-size: 1.1rem;
+    }
+
+    .footerLinks {
+        gap: 16px;
     }
 }
