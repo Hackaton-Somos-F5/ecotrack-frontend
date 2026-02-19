@@ -8,7 +8,7 @@ import WasteModal from '../components/WasteModal';
 function ResiduoCard({ residuo }) {
     const esRecolectado = residuo.estado === 'RECOLECTADO';
     return (
-        <div className="residuoCard">
+        <div className="residuoCard glassEffect">
             <div className="residuoCardTop">
                 <div className="residuoCardLeft">
                     <div
@@ -97,13 +97,13 @@ export default function Residuos() {
     return (
         <div className="residuosPage">
             {/* Top bar */}
-            <div className="residuosTopBar">
+            <div className="residuosTopBar glassEffect">
                 <button className="backBtn" onClick={() => window.history.back()}>←</button>
                 <h1 className="residuosTitle">Gestión de Residuos</h1>
             </div>
 
             {/* Buscador */}
-            <div className="searchBar">
+            <div className="searchBar glassEffect">
                 <span className="searchIcon">🔍</span>
                 <input
                     type="text"

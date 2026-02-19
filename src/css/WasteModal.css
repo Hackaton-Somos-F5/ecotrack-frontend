@@ -2,12 +2,14 @@
 .modalOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
     z-index: 1000;
     display: flex;
     align-items: center;
+    /* Centrado vertical */
     justify-content: center;
+    /* Centrado horizontal */
     padding: 20px;
     animation: overlayIn 0.3s ease-out;
 }
@@ -23,35 +25,26 @@
 }
 
 .modalBox {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 28px;
+    background: white;
+    /* Fondo blanco sólido para evitar confusiones */
+    border-radius: 30px;
     width: 100%;
-    max-width: 500px;
-    max-height: 85vh;
-    overflow-y: auto;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    max-width: 800px;
+    /* Un poco más ancho según pedido */
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
     animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
-}
-
-.modalBox::-webkit-scrollbar {
-    width: 6px;
-}
-
-.modalBox::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 @keyframes modalIn {
     from {
         opacity: 0;
-        transform: scale(0.95) translateY(10px);
+        transform: scale(0.96) translateY(20px);
     }
 
     to {
@@ -61,266 +54,270 @@
 }
 
 .modalHeader {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 24px 24px 16px;
-    position: sticky;
-    top: 0;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px);
-    z-index: 10;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    justify-content: center;
+    /* Centrar título */
+    padding: 24px 30px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+    box-sizing: border-box;
+    position: relative;
+    /* Para la X */
 }
 
 .modalTitle {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: #1a202c;
-    letter-spacing: -0.02em;
+    margin: 0;
+    text-align: center;
 }
 
 .modalClose {
-    background: rgba(0, 0, 0, 0.05);
+    position: absolute;
+    right: 24px;
+    background: #f1f5f9;
     border: none;
     width: 36px;
     height: 36px;
     border-radius: 12px;
-    font-size: 0.9rem;
-    color: #4a5568;
+    font-size: 1rem;
+    color: #64748b;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s;
 }
 
 .modalClose:hover {
-    background: rgba(239, 68, 68, 0.1);
+    background: #fee2e2;
     color: #ef4444;
-    transform: rotate(90deg);
 }
 
 .modalBody {
-    padding: 24px;
+    flex: 1;
+    width: 100% !important;
+    /* FORZAR ANCHO TOTAL */
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    align-items: center;
+    /* Centrar elementos hijos */
+    gap: 32px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: transparent;
 }
 
-/* Fields */
+/* Campos de formulario */
 .fieldGroup {
+    width: 100%;
+    max-width: 600px;
+    /* Limitar ancho un poco para centrar visualmente */
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+    text-align: center;
+    /* Centrar etiquetas */
 }
 
 .fieldGroup label {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    color: #718096;
+    color: #475569;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding-left: 4px;
+    letter-spacing: 0.1em;
+    /* Un poco más de espacio */
+    margin-bottom: 4px;
 }
 
-.fieldGroup input,
-.fieldGroup select {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1.5px solid rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
-    padding: 14px 16px;
-    font-size: 1rem;
+.fieldGroup input {
+    width: 100%;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 16px;
+    font-size: 1.1rem;
     color: #1a202c;
-    outline: none;
     font-family: inherit;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s;
+    box-sizing: border-box;
+    text-align: center;
+    /* Centrar texto dentro del input */
 }
 
-.fieldGroup input:hover,
-.fieldGroup select:hover {
-    border-color: rgba(46, 204, 113, 0.3);
-    background: rgba(255, 255, 255, 0.9);
-}
-
-.fieldGroup input:focus,
-.fieldGroup select:focus {
+.fieldGroup input:focus {
     background: white;
     border-color: #2ecc71;
-    box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1);
+    outline: none;
 }
 
-.fieldGroup input.inputError {
-    border-color: #feb2b2;
-    background: rgba(255, 245, 245, 0.8);
-}
-
-.fieldError {
-    font-size: 0.75rem;
-    color: #e53e3e;
-    font-weight: 600;
-    padding-left: 4px;
-}
-
+/* Grid de filas */
 .fieldRow {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 24px;
+    width: 100%;
+    max-width: 600px;
+    /* Centrar también estas filas */
 }
 
-/* Tipo pills */
+/* Selector de categorías */
 .tipoGrid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 4px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 600px;
+    /* Centrar también el grid */
+    justify-content: center;
+    /* Centrar items si sobran huecos */
 }
 
 .tipoPill {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1.5px solid rgba(0, 0, 0, 0.08);
-    border-radius: 12px;
-    padding: 10px 16px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #4a5568;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #475569;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 10px;
 }
 
 .tipoPill:hover {
     border-color: #2ecc71;
-    color: #2ecc71;
-    background: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.1);
+    background: #f0fdf4;
 }
 
 .tipoPillActive {
     background: #2ecc71;
     border-color: #2ecc71;
     color: white;
-    font-weight: 700;
-    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.25);
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.2);
 }
 
-.tipoPillActive:hover {
-    background: #27ae60;
-    color: white;
-}
-
-/* Estado toggle */
+/* Toggle de estado */
 .estadoToggle {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    background: rgba(0, 0, 0, 0.04);
+    gap: 8px;
+    background: #f1f5f9;
     padding: 6px;
-    border-radius: 16px;
+    border-radius: 18px;
+    width: 100%;
 }
 
 .estadoBtn {
     padding: 12px;
     border: none;
-    border-radius: 12px;
-    font-size: 0.9rem;
+    border-radius: 14px;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: #718096;
+    color: #64748b;
     background: transparent;
     cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.estadoBtn:hover {
-    color: #4a5568;
+    transition: all 0.2s;
 }
 
 .estadoBtnPendiente {
     background: white;
     color: #d97706;
-    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .estadoBtnRecolectado {
     background: #2ecc71;
     color: white;
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Modal footer */
+/* Footer fijo */
 .modalFooter {
+    width: 100%;
     display: flex;
-    gap: 14px;
-    padding: 16px 24px 24px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(5px);
+    gap: 16px;
+    padding: 24px 30px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    justify-content: center;
+    /* Centrar botones */
 }
 
 .btnCancelar {
+    max-width: 180px;
+    /* Tamaño más controlado para centrar */
     flex: 1;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.05);
-    border: none;
-    border-radius: 16px;
-    font-size: 0.95rem;
+    padding: 16px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 18px;
+    font-size: 1rem;
     font-weight: 700;
-    color: #4a5568;
+    color: #64748b;
     cursor: pointer;
-    font-family: inherit;
     transition: all 0.2s;
 }
 
 .btnCancelar:hover {
-    background: rgba(0, 0, 0, 0.08);
-    color: #2d3748;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
 }
 
 .btnGuardar {
+    max-width: 300px;
+    /* Tamaño más controlado para centrar */
     flex: 2;
-    padding: 15px;
+    padding: 16px;
     background: #2ecc71;
     border: none;
-    border-radius: 16px;
-    font-size: 1rem;
+    border-radius: 18px;
+    font-size: 1.1rem;
     font-weight: 800;
     color: white;
     cursor: pointer;
-    font-family: inherit;
-    box-shadow: 0 10px 20px -5px rgba(46, 204, 113, 0.4);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 15px -3px rgba(46, 204, 113, 0.3);
+    transition: all 0.2s;
 }
 
 .btnGuardar:hover:not(:disabled) {
-    background: #27ae60;
+    background: #22c55e;
     transform: translateY(-2px);
-    box-shadow: 0 15px 30px -5px rgba(46, 204, 113, 0.5);
+    box-shadow: 0 20px 25px -5px rgba(46, 204, 113, 0.4);
 }
 
-.btnGuardar:active:not(:disabled) {
-    transform: translateY(0);
-}
-
-.btnGuardar:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    filter: grayscale(0.5);
-}
-
-/* Responsive adjustments */
-@media (max-width: 500px) {
+/* Responsive */
+@media (max-width: 640px) {
     .modalBox {
-        border-radius: 24px;
-        max-height: 90vh;
-        width: calc(100% - 32px);
+        max-width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .modalHeader,
+    .modalBody,
+    .modalFooter {
+        padding: 20px;
     }
 
     .fieldRow {
         grid-template-columns: 1fr;
+    }
+
+    .tipoGrid {
+        grid-template-columns: 1fr 1fr;
     }
 }

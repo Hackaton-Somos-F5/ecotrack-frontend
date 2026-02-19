@@ -154,38 +154,39 @@ export default function WasteModal({ isOpen, onClose, onSuccess }) {
                         </div>
                     </div>
 
-                    {/* Aula */}
-                    <div className="fieldGroup">
-                        <label>Aula / Zona</label>
-                        <input
-                            name="aula"
-                            type="text"
-                            placeholder="ej. Aula 402, Comedor..."
-                            value={form.aula}
-                            onChange={handleChange}
-                            className={errors.aula ? 'inputError' : ''}
-                        />
-                        {errors.aula && <span className="fieldError">{errors.aula}</span>}
-                    </div>
+                    {/* Aula y Estado */}
+                    <div className="fieldRow">
+                        <div className="fieldGroup">
+                            <label>Aula / Zona</label>
+                            <input
+                                name="aula"
+                                type="text"
+                                placeholder="ej. Aula 402, Comedor..."
+                                value={form.aula}
+                                onChange={handleChange}
+                                className={errors.aula ? 'inputError' : ''}
+                            />
+                            {errors.aula && <span className="fieldError">{errors.aula}</span>}
+                        </div>
 
-                    {/* Estado */}
-                    <div className="fieldGroup">
-                        <label>Estado</label>
-                        <div className="estadoToggle">
-                            <button
-                                type="button"
-                                className={`estadoBtn ${form.estado === 'PENDIENTE' ? 'estadoBtnPendiente' : ''}`}
-                                onClick={() => setForm({ ...form, estado: 'PENDIENTE' })}
-                            >
-                                Pendiente
-                            </button>
-                            <button
-                                type="button"
-                                className={`estadoBtn ${form.estado === 'RECOLECTADO' ? 'estadoBtnRecolectado' : ''}`}
-                                onClick={() => setForm({ ...form, estado: 'RECOLECTADO' })}
-                            >
-                                Recolectado
-                            </button>
+                        <div className="fieldGroup">
+                            <label>Estado</label>
+                            <div className="estadoToggle">
+                                <button
+                                    type="button"
+                                    className={`estadoBtn ${form.estado === 'PENDIENTE' ? 'estadoBtnPendiente' : ''}`}
+                                    onClick={() => setForm({ ...form, estado: 'PENDIENTE' })}
+                                >
+                                    Pendiente
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`estadoBtn ${form.estado === 'RECOLECTADO' ? 'estadoBtnRecolectado' : ''}`}
+                                    onClick={() => setForm({ ...form, estado: 'RECOLECTADO' })}
+                                >
+                                    Recolectado
+                                </button>
+                            </div>
                         </div>
                     </div>
 
