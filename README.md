@@ -109,14 +109,14 @@ npm run dev
 
 Proyecto desarrollado por estudiantes con el objetivo de aportar **soluciones tecnológicas sostenibles**.
 
-**Heber Paris Caamaño**
-GitHub: [https://github.com/webermuros1-oss](https://github.com/webermuros1-oss)
+**Heber Paris Caamaño**<br>
+GitHub: [https://github.com/webermuros1-oss](https://github.com/webermuros1-oss)<br>
 LinkedIn: [https://www.linkedin.com/in/heber-paris-caama%C3%B1o/](https://www.linkedin.com/in/heber-paris-caama%C3%B1o/)
 
 **Geraldine Saco**
 
-**Lorena Da Silva Ferreira**
-GitHub: [https://github.com/lorenasferreira](https://github.com/lorenasferreira)
+**Lorena Da Silva Ferreira**<br>
+GitHub: [https://github.com/lorenasferreira](https://github.com/lorenasferreira)<br>
 LinkedIn: [https://www.linkedin.com/in/lorenasferreira](https://www.linkedin.com/in/lorenasferreira)
 
 **Germán Illan Puertas**
