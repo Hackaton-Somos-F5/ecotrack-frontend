@@ -295,6 +295,10 @@ export default function Residuos() {
 
     return (
         <div className="residuosPage">
+            <button className="fabBtn" onClick={() => setModalAbierto(true)} aria-label="Añadir residuo">
+                +
+            </button>
+
             {/* Top bar */}
             <div className="residuosTopBar">
                 <button className="backBtn" onClick={() => window.history.back()}>←</button>
@@ -338,10 +342,7 @@ export default function Residuos() {
             </div>
 
             {/* Botón flotante */}
-            <button className="fabBtn" onClick={() => setModalAbierto(true)} aria-label="Añadir residuo">
-                +
-            </button>
-
+            
             {/* Modal */}
             {modalAbierto && (
                 <ModalAnadir

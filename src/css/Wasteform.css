@@ -265,7 +265,7 @@
 
 /* Botón flotante + */
 .fabBtn {
-    position: fixed;
+    position: absolute;
     bottom: 28px;
     right: calc(50% - 240px + 20px);
     width: 56px;
