@@ -1,14 +1,23 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = "http://127.0.0.1:8000";
 
 export const registerUser = async (userData) => {
-  try {
-    const response = await axios.post(`${API_URL}/register`, userData);
-    return response.data;
-  } catch (error) {
-    throw error.response?.data || "Error en el registro";
-  }
+    try {
+        const response = await axios.post(`${API_URL}/colegios/`, userData);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || "Error en el registro";
+    }
+};
+
+export const loginUser = async (credentials) => {
+    try {
+        const response = await axios.post(`${API_URL}/auth/login`, credentials);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || "Error en el inicio de sesión";
+    }
 };
 // services/api.js
 // Aquí conectarás con tu backend cuando esté listo.

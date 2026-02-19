@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../css/WasteForm.css';
+import '../css/Wasteform.css';
 
 // --- Datos mock ---
 const RESIDUOS_MOCK = [
@@ -298,7 +298,7 @@ export default function Residuos() {
             {/* Top bar */}
             <div className="residuosTopBar">
                 <button className="backBtn" onClick={() => window.history.back()}>←</button>
-                
+
             </div>
 
             {/* Buscador */}

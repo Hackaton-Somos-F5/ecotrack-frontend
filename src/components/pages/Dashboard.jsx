@@ -1,21 +1,23 @@
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import '../css/Dashboard.css';
+import { useAuth } from "../../context/AuthContext";
+
 
 const WASTE_TYPES = [
-    { code: 'ORGANIC',  label: 'Orgánico',  percentage: 45,  icon: '🥬', color: '#f59e0b', bg: '#fef3c7' },
-    { code: 'PLASTIC',  label: 'Plástico',  percentage: 92,  icon: '♻️', color: '#2ecc71', bg: '#d1fae5' },
-    { code: 'PAPER',    label: 'Papel',     percentage: 40,  icon: '📄', color: '#3b82f6', bg: '#dbeafe' },
-    { code: 'GLASS',    label: 'Vidrio',    percentage: 50,  icon: '🪟', color: '#06b6d4', bg: '#cffafe' },
-    { code: 'WASTE',    label: 'Residuos',  percentage: 75,  icon: '🗑️', color: '#8b5cf6', bg: '#ede9fe' },
-    { code: 'HAZARD',   label: 'Peligroso', percentage: 20,  icon: '⚠️', color: '#ef4444', bg: '#fee2e2' },
+    { code: 'ORGANIC', label: 'Orgánico', percentage: 45, icon: '🥬', color: '#f59e0b', bg: '#fef3c7' },
+    { code: 'PLASTIC', label: 'Plástico', percentage: 92, icon: '♻️', color: '#2ecc71', bg: '#d1fae5' },
+    { code: 'PAPER', label: 'Papel', percentage: 40, icon: '📄', color: '#3b82f6', bg: '#dbeafe' },
+    { code: 'GLASS', label: 'Vidrio', percentage: 50, icon: '🪟', color: '#06b6d4', bg: '#cffafe' },
+    { code: 'WASTE', label: 'Residuos', percentage: 75, icon: '🗑️', color: '#8b5cf6', bg: '#ede9fe' },
+    { code: 'HAZARD', label: 'Peligroso', percentage: 20, icon: '⚠️', color: '#ef4444', bg: '#fee2e2' },
 ];
 
 const SERVICES = [
-    { icon: '🚛', label: 'Recogida',  desc: 'Solicitar recogida urgente' },
-    { icon: '📊', label: 'Informes',  desc: 'Ver informes mensuales' },
+    { icon: '🚛', label: 'Recogida', desc: 'Solicitar recogida urgente' },
+    { icon: '📊', label: 'Informes', desc: 'Ver informes mensuales' },
     { icon: '📅', label: 'Programar', desc: 'Programar próxima recogida' },
-    { icon: '📞', label: 'Contacto',  desc: 'Contactar con la empresa' },
+    { icon: '📞', label: 'Contacto', desc: 'Contactar con la empresa' },
 ];
 
 function WasteCard({ code, label, percentage, icon, color, bg }) {
@@ -91,15 +93,18 @@ function BottomControls() {
 }
 
 export default function Dashboard() {
+    const { user } = useAuth();
+
     return (
         <div className="dashboardPage">
-            
+
 
             <main className="dashboardMain">
                 <div className="dashboardTitleRow">
                     <div>
                         <h1 className="dashboardTitle">Panel de Control</h1>
-                        <p className="dashboardSubtitle">Colegio San José · Resumen de residuos</p>
+                        <p className="dashboardSubtitle">{user?.nombre || 'Colegio'} · Resumen de residuos</p>
+
                     </div>
                     <div className="dashboardStats">
                         <div className="dashboardStat">
@@ -124,7 +129,7 @@ export default function Dashboard() {
                 <BottomControls />
             </main>
 
-            
+
         </div>
     );
 }

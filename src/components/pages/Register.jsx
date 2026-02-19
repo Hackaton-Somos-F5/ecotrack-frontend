@@ -9,9 +9,14 @@ import {
   FaPhone,
   FaCity,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+
 
 function Register() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nombre: "",
     direccion: "",
@@ -52,8 +57,8 @@ function Register() {
 
     if (!formData.password) {
       newErrors.password = "La contraseña es obligatoria";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Mínimo 6 caracteres";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Mínimo 8 caracteres";
     }
 
     if (formData.password !== formData.confirmPassword) {
@@ -97,9 +102,12 @@ function Register() {
     try {
       const { confirmPassword, acceptedTerms, ...dataToSend } = formData;
 
-      await registerUser(dataToSend);
+      const userData = await registerUser(dataToSend);
 
+      login(userData);
       alert("Registro exitoso 🎉");
+      navigate("/dashboard");
+
 
       setFormData({
         nombre: "",
@@ -112,7 +120,25 @@ function Register() {
         acceptedTerms: false,
       });
     } catch (error) {
-      setServerError("Error al registrar. Intenta nuevamente.");
+      console.error("Error en registro:", error);
+
+      let errorMsg = "Error al registrar. Intenta nuevamente.";
+
+      if (error.detail && Array.isArray(error.detail)) {
+        // Formatear errores de FastAPI (422 Unprocessable Entity)
+        errorMsg = error.detail
+          .map(err => {
+            const field = err.loc[err.loc.length - 1];
+            return `${field}: ${err.msg}`;
+          })
+          .join(" | ");
+      } else if (typeof error === 'string') {
+        errorMsg = error;
+      } else if (error.message) {
+        errorMsg = error.message;
+      }
+
+      setServerError(errorMsg);
     } finally {
       setLoading(false);
     }
