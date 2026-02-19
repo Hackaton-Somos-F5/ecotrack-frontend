@@ -110,9 +110,7 @@ export default function Residuos() {
 
     return (
         <div className="residuosPage">
-            <button className="fabBtn" onClick={() => setModalAbierto(true)} aria-label="Añadir residuo">
-                +
-            </button>
+            
 
             {/* Top bar */}
             <div className="residuosTopBar glassEffect">
