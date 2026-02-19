@@ -1,7 +1,7 @@
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
+//import Header from '../header/Header';
+//import Footer from '../footer/Footer';
 import '../css/Dashboard.css';
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 
 const WASTE_TYPES = [

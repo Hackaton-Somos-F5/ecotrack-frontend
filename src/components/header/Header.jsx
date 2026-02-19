@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Header.css';
 import { useAuth } from '../../context/AuthContext';
 
-
 export default function Header({ notificaciones = 1 }) {
     const { user, logout } = useAuth();
     const userName = user?.nombre || "Invitado";
@@ -18,8 +17,8 @@ export default function Header({ notificaciones = 1 }) {
                 setMenuAbierto(false);
             }
         }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
     const handleNavegar = (ruta) => {
@@ -101,12 +100,10 @@ export default function Header({ notificaciones = 1 }) {
                                 </button>
                             ) : (
                                 <button className="dropdownItem" onClick={() => handleNavegar('/login')}>
-                                    <span className="dropdownItemIcon">🔑</span>
+                                    <span className="dropdownItemIcon">�</span>
                                     <span>Iniciar sesión</span>
                                 </button>
                             )}
-
-
                         </div>
                     )}
                 </div>

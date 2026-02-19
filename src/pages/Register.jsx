@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUser } from "../services/api";
+import { colegios } from "../services/api";
 import "../css/Register.css";
 import {
   FaEnvelope,
@@ -10,8 +10,7 @@ import {
   FaCity,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-
+import { useAuth } from "../context/AuthContext";
 
 function Register() {
   const { login } = useAuth();
@@ -53,12 +52,14 @@ function Register() {
 
     if (!formData.email.trim()) {
       newErrors.email = "El correo es obligatorio";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "El formato del correo no es válido";
     }
 
     if (!formData.password) {
       newErrors.password = "La contraseña es obligatoria";
     } else if (formData.password.length < 8) {
-      newErrors.password = "Mínimo 8 caracteres";
+      newErrors.password = "La contraseña debe tener al menos 8 caracteres";
     }
 
     if (formData.password !== formData.confirmPassword) {
@@ -66,7 +67,7 @@ function Register() {
     }
 
     if (!formData.acceptedTerms) {
-      newErrors.acceptedTerms = "Debes aceptar los términos";
+      newErrors.acceptedTerms = "Debes aceptar los términos y condiciones";
     }
 
     return newErrors;
@@ -74,23 +75,25 @@ function Register() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: type === "checkbox" ? checked : value,
-    });
+    }));
 
-    setErrors({
-      ...errors,
-      [name]: "",
-    });
+    // Limpiar error del campo que se está editando
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+    // Limpiar error del servidor al editar cualquier campo
+    if (serverError) {
+      setServerError("");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationErrors = validate();
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -100,45 +103,25 @@ function Register() {
     setServerError("");
 
     try {
+      // Preparar datos (excluir campos del frontend que no van al backend)
       const { confirmPassword, acceptedTerms, ...dataToSend } = formData;
+      console.log("Enviando datos al backend:", dataToSend);
+      const userData = await colegios.register(dataToSend);
+      console.log("Registro exitoso:", userData);
 
-      const userData = await registerUser(dataToSend);
+      // Normalizamos la respuesta para el contexto (usualmente devuelve id y nombre)
+      const formattedUser = {
+        id: userData.id || userData.colegio_id,
+        nombre: userData.nombre || userData.colegio_nombre,
+        email: formData.email
+      };
 
-      login(userData);
-      alert("Registro exitoso 🎉");
+      login(formattedUser);
+      alert("¡Registro exitoso! 🎉 Bienvenido a EcoTrack.");
       navigate("/dashboard");
-
-
-      setFormData({
-        nombre: "",
-        direccion: "",
-        ciudad: "",
-        telefono: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        acceptedTerms: false,
-      });
     } catch (error) {
       console.error("Error en registro:", error);
-
-      let errorMsg = "Error al registrar. Intenta nuevamente.";
-
-      if (error.detail && Array.isArray(error.detail)) {
-        // Formatear errores de FastAPI (422 Unprocessable Entity)
-        errorMsg = error.detail
-          .map(err => {
-            const field = err.loc[err.loc.length - 1];
-            return `${field}: ${err.msg}`;
-          })
-          .join(" | ");
-      } else if (typeof error === 'string') {
-        errorMsg = error;
-      } else if (error.message) {
-        errorMsg = error.message;
-      }
-
-      setServerError(errorMsg);
+      setServerError(error.message || "Error al registrar. Intenta nuevamente.");
     } finally {
       setLoading(false);
     }
@@ -153,7 +136,7 @@ function Register() {
         <h3>Datos del colegio</h3>
 
         <div className="form-group">
-          <label>Nombre del colegio</label>
+          <label>Nombre del colegio *</label>
           <div className="input-wrapper">
             <FaSchool className="input-icon" />
             <input
@@ -162,13 +145,14 @@ function Register() {
               placeholder="Ej. Colegio Verde"
               value={formData.nombre}
               onChange={handleChange}
+              disabled={loading}
             />
           </div>
           {errors.nombre && <span className="error">{errors.nombre}</span>}
         </div>
 
         <div className="form-group">
-          <label>Dirección</label>
+          <label>Dirección *</label>
           <div className="input-wrapper">
             <FaMapMarkerAlt className="input-icon" />
             <input
@@ -177,15 +161,14 @@ function Register() {
               placeholder="Calle Ejemplo 123"
               value={formData.direccion}
               onChange={handleChange}
+              disabled={loading}
             />
           </div>
-          {errors.direccion && (
-            <span className="error">{errors.direccion}</span>
-          )}
+          {errors.direccion && <span className="error">{errors.direccion}</span>}
         </div>
 
         <div className="form-group">
-          <label>Ciudad</label>
+          <label>Ciudad *</label>
           <div className="input-wrapper">
             <FaCity className="input-icon" />
             <input
@@ -194,21 +177,23 @@ function Register() {
               placeholder="Barcelona"
               value={formData.ciudad}
               onChange={handleChange}
+              disabled={loading}
             />
           </div>
           {errors.ciudad && <span className="error">{errors.ciudad}</span>}
         </div>
 
         <div className="form-group">
-          <label>Teléfono</label>
+          <label>Teléfono *</label>
           <div className="input-wrapper">
             <FaPhone className="input-icon" />
             <input
-              type="text"
+              type="tel"
               name="telefono"
               placeholder="+34 600 000 000"
               value={formData.telefono}
               onChange={handleChange}
+              disabled={loading}
             />
           </div>
           {errors.telefono && <span className="error">{errors.telefono}</span>}
@@ -217,7 +202,7 @@ function Register() {
         <h3>Datos de acceso</h3>
 
         <div className="form-group">
-          <label>Correo electrónico</label>
+          <label>Correo electrónico *</label>
           <div className="input-wrapper">
             <FaEnvelope className="input-icon" />
             <input
@@ -226,36 +211,39 @@ function Register() {
               placeholder="ejemplo@correo.com"
               value={formData.email}
               onChange={handleChange}
+              disabled={loading}
             />
           </div>
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
 
         <div className="form-group">
-          <label>Contraseña</label>
+          <label>Contraseña *</label>
           <div className="input-wrapper">
             <FaLock className="input-icon" />
             <input
               type="password"
               name="password"
-              placeholder="******"
+              placeholder="Mínimo 8 caracteres"
               value={formData.password}
               onChange={handleChange}
+              disabled={loading}
             />
           </div>
           {errors.password && <span className="error">{errors.password}</span>}
         </div>
 
         <div className="form-group">
-          <label>Confirmar contraseña</label>
+          <label>Confirmar contraseña *</label>
           <div className="input-wrapper">
             <FaLock className="input-icon" />
             <input
               type="password"
               name="confirmPassword"
-              placeholder="******"
+              placeholder="Repite la contraseña"
               value={formData.confirmPassword}
               onChange={handleChange}
+              disabled={loading}
             />
           </div>
           {errors.confirmPassword && (
@@ -267,22 +255,45 @@ function Register() {
           <input
             type="checkbox"
             name="acceptedTerms"
+            id="acceptedTerms"
             checked={formData.acceptedTerms}
             onChange={handleChange}
+            disabled={loading}
           />
-          <label>
+          <label htmlFor="acceptedTerms">
             Acepto los <span className="link">términos y condiciones</span> así
-            como las políticas de privacidad.
+            como las políticas de privacidad *
           </label>
         </div>
         {errors.acceptedTerms && (
           <span className="error">{errors.acceptedTerms}</span>
         )}
 
-        {serverError && <p className="server-error">{serverError}</p>}
+        {serverError && (
+          <div
+            className="server-error"
+            style={{
+              color: "#dc2626",
+              background: "#fee2e2",
+              padding: "12px",
+              borderRadius: "8px",
+              marginBottom: "15px",
+              fontSize: "14px",
+            }}
+          >
+            ❌ {serverError}
+          </div>
+        )}
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Registrando..." : "Registrarse"}
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            opacity: loading ? 0.7 : 1,
+            cursor: loading ? "not-allowed" : "pointer",
+          }}
+        >
+          {loading ? "⏳ Registrando..." : "Registrarse"}
         </button>
 
         <p className="login-redirect">

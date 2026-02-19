@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { loginUser } from "../services/api";
+import { auth } from "../services/api";
 import "../css/Login.css";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
     const { login } = useAuth();
@@ -31,14 +31,14 @@ function Login() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        setErrors({ ...errors, [name]: "" });
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+        if (serverError) setServerError("");
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validate();
-
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
@@ -48,35 +48,23 @@ function Login() {
         setServerError("");
 
         try {
-            const response = await loginUser(formData);
+            console.log("Intentando login con:", formData);
+            const response = await auth.login(formData);
+            console.log("Login exitoso:", response);
 
-            // Normalizamos la respuesta para que coincida con la estructura del resto de la app
+            // Normalizamos la respuesta para el contexto
             const userData = {
                 id: response.colegio_id,
                 nombre: response.colegio_nombre,
-                email: formData.email // El email lo tenemos del formulario
+                email: formData.email
             };
 
             login(userData);
-            alert("¡Bienvenido de nuevo! 👋");
+            alert(`✅ ¡Bienvenido ${response.colegio_nombre}! 👋`);
             navigate("/dashboard");
         } catch (error) {
             console.error("Error en login:", error);
-
-
-            let errorMsg = "Error al iniciar sesión. Verifica tus credenciales.";
-
-            if (error.detail && Array.isArray(error.detail)) {
-                errorMsg = error.detail
-                    .map(err => `${err.loc[err.loc.length - 1]}: ${err.msg}`)
-                    .join(" | ");
-            } else if (error.detail && typeof error.detail === "string") {
-                errorMsg = error.detail;
-            } else if (typeof error === 'string') {
-                errorMsg = error;
-            }
-
-            setServerError(errorMsg);
+            setServerError(error.message || "Error al iniciar sesión. Verifica tus credenciales.");
         } finally {
             setLoading(false);
         }
@@ -89,7 +77,7 @@ function Login() {
 
             <form className="login-form" onSubmit={handleSubmit} noValidate>
                 <div className="form-group">
-                    <label>Correo electrónico</label>
+                    <label>Correo electrónico *</label>
                     <div className="input-wrapper">
                         <FaEnvelope className="input-icon" />
                         <input
@@ -98,13 +86,14 @@ function Login() {
                             placeholder="ejemplo@correo.com"
                             value={formData.email}
                             onChange={handleChange}
+                            disabled={loading}
                         />
                     </div>
                     {errors.email && <span className="error">{errors.email}</span>}
                 </div>
 
                 <div className="form-group">
-                    <label>Contraseña</label>
+                    <label>Contraseña *</label>
                     <div className="input-wrapper">
                         <FaLock className="input-icon" />
                         <input
@@ -113,15 +102,20 @@ function Login() {
                             placeholder="******"
                             value={formData.password}
                             onChange={handleChange}
+                            disabled={loading}
                         />
                     </div>
                     {errors.password && <span className="error">{errors.password}</span>}
                 </div>
 
-                {serverError && <p className="server-error">{serverError}</p>}
+                {serverError && (
+                    <div className="server-error" style={{ color: "#dc2626", background: "#fee2e2", padding: "12px", borderRadius: "8px", marginBottom: "15px", fontSize: "14px" }}>
+                        ❌ {serverError}
+                    </div>
+                )}
 
                 <button className="login-btn" type="submit" disabled={loading}>
-                    {loading ? "Iniciando sesión..." : "Iniciar sesión"}
+                    {loading ? "⏳ Iniciando sesión..." : "Iniciar sesión"}
                 </button>
 
                 <p className="register-redirect">

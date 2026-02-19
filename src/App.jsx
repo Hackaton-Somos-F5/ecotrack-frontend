@@ -1,12 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/header/Header.jsx";
-import Home from "./components/pages/Home.jsx";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/header/Header.jsx';
 import Footer from './components/footer/Footer.jsx';
-import Dashboard from './components/pages/Dashboard.jsx';
-import Register from './components/pages/Register.jsx';
-import Wasteform from './components/pages/Wasteform.jsx';
-import Login from './components/pages/Login.jsx';
-
+import Dashboard from './pages/Dashboard.jsx';
+import Register from './pages/Register.jsx';
+import Wasteform from './pages/Wasteform.jsx';
+import Login from './pages/Login.jsx';
+import Home from './pages/Home.jsx';
 
 function App() {
   return (
