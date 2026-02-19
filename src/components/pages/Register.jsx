@@ -1,16 +1,29 @@
 import { useState } from "react";
 import { registerUser } from "../services/api";
 import "../css/Register.css";
-import { FaUser, FaEnvelope, FaSchool, FaLock } from "react-icons/fa";
+import {
+  FaUser,
+  FaEnvelope,
+  FaSchool,
+  FaLock,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaCity,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    nombre: "",
+    direccion: "",
+    ciudad: "",
+    telefono: "",
+
+    nombreDirector: "",
     email: "",
-    school: "",
     password: "",
     confirmPassword: "",
+
     acceptedTerms: false,
   });
 
@@ -21,18 +34,29 @@ function Register() {
   const validate = () => {
     const newErrors = {};
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = "El nombre es obligatorio";
+    if (!formData.nombre.trim()) {
+      newErrors.nombre = "El nombre del colegio es obligatorio";
+    }
+
+    if (!formData.direccion.trim()) {
+      newErrors.direccion = "La dirección es obligatoria";
+    }
+
+    if (!formData.ciudad.trim()) {
+      newErrors.ciudad = "La ciudad es obligatoria";
+    }
+
+    if (!formData.telefono.trim()) {
+      newErrors.telefono = "El teléfono es obligatorio";
+    }
+
+    if (!formData.nombreDirector.trim()) {
+      newErrors.nombreDirector =
+        "El nombre del director/docente es obligatorio";
     }
 
     if (!formData.email.trim()) {
       newErrors.email = "El correo es obligatorio";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Correo inválido";
-    }
-
-    if (!formData.school.trim()) {
-      newErrors.school = "El centro escolar es obligatorio";
     }
 
     if (!formData.password) {
@@ -80,26 +104,25 @@ function Register() {
     setServerError("");
 
     try {
-      const { confirmPassword, ...dataToSend } = formData;
+      const { confirmPassword, acceptedTerms, ...dataToSend } = formData;
 
       await registerUser(dataToSend);
 
       alert("Registro exitoso 🎉");
 
       setFormData({
-        fullName: "",
+        nombre: "",
+        direccion: "",
+        ciudad: "",
+        telefono: "",
+        nombreDirector: "",
         email: "",
-        school: "",
         password: "",
         confirmPassword: "",
         acceptedTerms: false,
       });
     } catch (error) {
-      setServerError(
-        typeof error === "string"
-          ? error
-          : "Error al registrar. Intenta nuevamente.",
-      );
+      setServerError("Error al registrar. Intenta nuevamente.");
     } finally {
       setLoading(false);
     }
@@ -108,24 +131,90 @@ function Register() {
   return (
     <div className="register-container">
       <h1>Crea tu cuenta</h1>
-      <p>Únete a la red de colegios sostenibles</p>
+      <p>Registra tu colegio y comienza a monitorear residuos</p>
 
       <form onSubmit={handleSubmit} noValidate>
+        <h3>Datos del colegio</h3>
+
         <div className="form-group">
-          <label>Nombre completo</label>
+          <label>Nombre del colegio</label>
+          <div className="input-wrapper">
+            <FaSchool className="input-icon" />
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Ej. Colegio Verde"
+              value={formData.nombre}
+              onChange={handleChange}
+            />
+          </div>
+          {errors.nombre && <span className="error">{errors.nombre}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Dirección</label>
+          <div className="input-wrapper">
+            <FaMapMarkerAlt className="input-icon" />
+            <input
+              type="text"
+              name="direccion"
+              placeholder="Calle Ejemplo 123"
+              value={formData.direccion}
+              onChange={handleChange}
+            />
+          </div>
+          {errors.direccion && (
+            <span className="error">{errors.direccion}</span>
+          )}
+        </div>
+
+        <div className="form-group">
+          <label>Ciudad</label>
+          <div className="input-wrapper">
+            <FaCity className="input-icon" />
+            <input
+              type="text"
+              name="ciudad"
+              placeholder="Barcelona"
+              value={formData.ciudad}
+              onChange={handleChange}
+            />
+          </div>
+          {errors.ciudad && <span className="error">{errors.ciudad}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Teléfono</label>
+          <div className="input-wrapper">
+            <FaPhone className="input-icon" />
+            <input
+              type="text"
+              name="telefono"
+              placeholder="+34 600 000 000"
+              value={formData.telefono}
+              onChange={handleChange}
+            />
+          </div>
+          {errors.telefono && <span className="error">{errors.telefono}</span>}
+        </div>
+
+        <h3>Datos de acceso</h3>
+
+        <div className="form-group">
+          <label>Nombre del director/docente</label>
           <div className="input-wrapper">
             <FaUser className="input-icon" />
             <input
               type="text"
-              name="fullName"
-              placeholder="Ej. Juan Pérez"
-              value={formData.fullName}
+              name="nombreDirector"
+              placeholder="Ej. Harry Potter"
+              value={formData.nombreDirector}
               onChange={handleChange}
             />
-            {errors.fullName && (
-              <span className="error">{errors.fullName}</span>
-            )}
           </div>
+          {errors.nombreDirector && (
+            <span className="error">{errors.nombreDirector}</span>
+          )}
         </div>
 
         <div className="form-group">
@@ -139,23 +228,8 @@ function Register() {
               value={formData.email}
               onChange={handleChange}
             />
-            {errors.email && <span className="error">{errors.email}</span>}
           </div>
-        </div>
-
-        <div className="form-group">
-          <label>Centro escolar</label>
-          <div className="input-wrapper">
-            <FaSchool className="input-icon" />
-            <input
-              type="text"
-              name="school"
-              placeholder="Nombre del centro"
-              value={formData.school}
-              onChange={handleChange}
-            />
-            {errors.school && <span className="error">{errors.school}</span>}
-          </div>
+          {errors.email && <span className="error">{errors.email}</span>}
         </div>
 
         <div className="form-group">
@@ -169,10 +243,8 @@ function Register() {
               value={formData.password}
               onChange={handleChange}
             />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
           </div>
+          {errors.password && <span className="error">{errors.password}</span>}
         </div>
 
         <div className="form-group">
@@ -186,10 +258,10 @@ function Register() {
               value={formData.confirmPassword}
               onChange={handleChange}
             />
-            {errors.confirmPassword && (
-              <span className="error">{errors.confirmPassword}</span>
-            )}
           </div>
+          {errors.confirmPassword && (
+            <span className="error">{errors.confirmPassword}</span>
+          )}
         </div>
 
         <div className="checkbox-group">
@@ -207,6 +279,8 @@ function Register() {
         {errors.acceptedTerms && (
           <span className="error">{errors.acceptedTerms}</span>
         )}
+
+        {serverError && <p className="server-error">{serverError}</p>}
 
         {serverError && <p className="server-error">{serverError}</p>}
 
