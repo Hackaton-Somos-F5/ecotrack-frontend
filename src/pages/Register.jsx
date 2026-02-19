@@ -10,8 +10,10 @@ import {
   FaCity,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Register() {
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -31,43 +33,43 @@ function Register() {
 
   const validate = () => {
     const newErrors = {};
-    
+
     if (!formData.nombre.trim()) {
       newErrors.nombre = "El nombre del colegio es obligatorio";
     }
-    
+
     if (!formData.direccion.trim()) {
       newErrors.direccion = "La dirección es obligatoria";
     }
-    
+
     if (!formData.ciudad.trim()) {
       newErrors.ciudad = "La ciudad es obligatoria";
     }
-    
+
     if (!formData.telefono.trim()) {
       newErrors.telefono = "El teléfono es obligatorio";
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = "El correo es obligatorio";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "El formato del correo no es válido";
     }
-    
+
     if (!formData.password) {
       newErrors.password = "La contraseña es obligatoria";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "La contraseña debe tener al menos 6 caracteres";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "La contraseña debe tener al menos 8 caracteres";
     }
-    
+
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Las contraseñas no coinciden";
     }
-    
+
     if (!formData.acceptedTerms) {
       newErrors.acceptedTerms = "Debes aceptar los términos y condiciones";
     }
-    
+
     return newErrors;
   };
 
@@ -77,7 +79,7 @@ function Register() {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
-    
+
     // Limpiar error del campo que se está editando
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
@@ -90,7 +92,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -103,26 +105,23 @@ function Register() {
     try {
       // Preparar datos (excluir campos del frontend que no van al backend)
       const { confirmPassword, acceptedTerms, ...dataToSend } = formData;
-      
       console.log("Enviando datos al backend:", dataToSend);
-      
-      const result = await colegios.register(dataToSend);
-      
-      console.log("Registro exitoso:", result);
-      
-      alert("✅ ¡Registro exitoso! Ahora puedes iniciar sesión.");
-      
-      // Redirigir al login después de 1.5 segundos
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
-      
+      const userData = await colegios.register(dataToSend);
+      console.log("Registro exitoso:", userData);
+
+      // Normalizamos la respuesta para el contexto (usualmente devuelve id y nombre)
+      const formattedUser = {
+        id: userData.id || userData.colegio_id,
+        nombre: userData.nombre || userData.colegio_nombre,
+        email: formData.email
+      };
+
+      login(formattedUser);
+      alert("¡Registro exitoso! 🎉 Bienvenido a EcoTrack.");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error en registro:", error);
-      setServerError(
-        error.message || 
-        "Error al conectar con el servidor. Verifica que esté corriendo en http://127.0.0.1:8000"
-      );
+      setServerError(error.message || "Error al registrar. Intenta nuevamente.");
     } finally {
       setLoading(false);
     }
@@ -225,7 +224,7 @@ function Register() {
             <input
               type="password"
               name="password"
-              placeholder="Mínimo 6 caracteres"
+              placeholder="Mínimo 8 caracteres"
               value={formData.password}
               onChange={handleChange}
               disabled={loading}

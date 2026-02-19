@@ -1,52 +1,59 @@
-//import Header from '../header/Header';
-//import Footer from '../footer/Footer';
+import { useState, useEffect } from 'react';
 import '../css/Dashboard.css';
-
-const WASTE_TYPES = [
-    { code: 'ORGANIC',  label: 'Orgánico',  percentage: 45,  icon: '🥬', color: '#815c1b', bg: '#fef3c7' },
-    { code: 'PLASTIC',  label: 'Plástico',  percentage: 92,  icon: '♻️', color: '#eae30efa', bg: '#f9fad1' },
-    { code: 'PAPER',    label: 'Papel',     percentage: 40,  icon: '📄', color: '#3b82f6', bg: '#dbeafe' },
-    { code: 'GLASS',    label: 'Vidrio',    percentage: 50,  icon: '🪟', color: '#1dc74d', bg: '#cffed3' },
-    { code: 'WASTE',    label: 'Residuos',  percentage: 75,  icon: '🗑️', color: '#5a595c', bg: '#e1e0e8' },
-    { code: 'HAZARD',   label: 'Peligroso', percentage: 20,  icon: '⚠️', color: '#ef4444', bg: '#fee2e2' },
-];
-
-const SERVICES = [
-    { icon: '🚛', label: 'Recogida',  desc: 'Solicitar recogida urgente' },
-    { icon: '📊', label: 'Informes',  desc: 'Ver informes mensuales' },
-    { icon: '📅', label: 'Programar', desc: 'Programar próxima recogida' },
-    { icon: '📞', label: 'Contacto',  desc: 'Contactar con la empresa' },
-];
+import { useAuth } from "../context/AuthContext";
+import api from '../services/api';
+import WasteModal from '../components/WasteModal';
+import { useNavigate } from 'react-router-dom';
 
 function WasteCard({ code, label, percentage, icon, color, bg }) {
     const isHigh = percentage >= 75;
     return (
-        <div className="wasteCard">
+        <div className="wasteCard glassEffect">
             <div className="wasteCardHeader">
-                <div className="wasteCardIcon" style={{ background: bg }}>
-                    <span>{icon}</span>
+                <div className="wasteCardIconBox" style={{ backgroundColor: bg }}>
+                    <span className="wasteCardEmoji">{icon}</span>
                 </div>
-                <span className={`wasteCardBadge ${isHigh ? 'wasteCardBadgeHigh' : 'wasteCardBadgeLow'}`}>
+                <div className="wasteCardMainInfo">
+                    <h3 className="wasteCardTitle">{label}</h3>
+                    <span className="wasteCardTag">{code}</span>
+                </div>
+                <div className={`wasteCardStatus ${isHigh ? 'statusHigh' : 'statusNormal'}`}>
                     {isHigh ? 'Alto' : 'Normal'}
-                </span>
+                </div>
             </div>
-            <p className="wasteCardLabel">{label}</p>
-            <p className="wasteCardCode">{code}</p>
-            <div className="wasteCardBarTrack">
-                <div
-                    className="wasteCardBarFill"
-                    style={{ width: `${percentage}%`, background: color }}
-                />
+
+            <div className="wasteCardContent">
+                <div className="wasteCardStats">
+                    <span className="statsLabel">Capacidad</span>
+                    <span className="statsValue" style={{ color: color }}>{percentage}%</span>
+                </div>
+                <div className="wasteCardProgress">
+                    <div className="progressTrack">
+                        <div
+                            className="progressFill"
+                            style={{
+                                width: `${Math.min(percentage, 100)}%`,
+                                backgroundColor: color,
+                                boxShadow: `0 0 12px ${color}44`
+                            }}
+                        />
+                    </div>
+                </div>
             </div>
-            <div className="wasteCardFooter">
-                <span className="wasteCardPct" style={{ color }}>{percentage}%</span>
-                <button className="wasteCardBtn" style={{ background: color }}>
-                    Solicitar
-                </button>
-            </div>
+
+            <button className="wasteCardButton" style={{ backgroundColor: color }}>
+                Solicitar Recogida
+            </button>
         </div>
     );
 }
+
+const SERVICES = [
+    { icon: '🚛', label: 'Recogida', desc: 'Solicitar recogida urgente' },
+    { icon: '📊', label: 'Informes', desc: 'Ver informes mensuales' },
+    { icon: '📅', label: 'Programar', desc: 'Programar próxima recogida' },
+    { icon: '📞', label: 'Contacto', desc: 'Contactar con la empresa' },
+];
 
 function ServiceSection() {
     return (
@@ -81,50 +88,118 @@ function NextPickupCard() {
     );
 }
 
-function BottomControls() {
+function BottomControls({ onAddClick, onHistoryClick }) {
     return (
         <div className="bottomControls">
-            <button className="bottomBtn bottomBtnPrimary">➕ Añadir residuo</button>
-            <button className="bottomBtn bottomBtnSecondary">📋 Ver historial</button>
+            <button className="bottomBtn bottomBtnPrimary" onClick={onAddClick}>
+                <span className="btnIcon">➕</span> Añadir residuo
+            </button>
+            <button className="bottomBtn bottomBtnSecondary" onClick={onHistoryClick}>
+                <span className="btnIcon">📋</span> Ver historial
+            </button>
         </div>
     );
 }
 
 export default function Dashboard() {
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    const [wasteTypes, setWasteTypes] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [totalKg, setTotalKg] = useState(0);
+    const [modalAbierto, setModalAbierto] = useState(false);
+
+    const fetchData = async () => {
+        if (!user?.id) return;
+
+        try {
+            setLoading(true);
+            const [cats, res] = await Promise.all([
+                api.categorias.getAll(),
+                api.residuos.getByColegio(user.id)
+            ]);
+
+            const calculatedWaste = cats.map(cat => {
+                const totalCat = res
+                    .filter(r => r.categoria_id === cat.id)
+                    .reduce((sum, r) => sum + (r.peso_kg || 0), 0);
+
+                const percentage = cat.umbral > 0 ? Math.round((totalCat / cat.umbral) * 100) : 0;
+
+                return {
+                    id: cat.id,
+                    code: cat.code,
+                    label: cat.label,
+                    icon: cat.icon,
+                    color: cat.color,
+                    bg: cat.bg,
+                    percentage: percentage,
+                    total: totalCat
+                };
+            });
+
+            setWasteTypes(calculatedWaste);
+            setTotalKg(res.reduce((sum, r) => sum + (r.peso_kg || 0), 0));
+            setError(null);
+        } catch (err) {
+            console.error("Error cargando datos del dashboard:", err);
+            setError("No se pudieron cargar los datos del dashboard.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [user?.id]);
+
+    if (loading) {
+        return <div className="dashboardPage"><p className="loadingText">Cargando dashboard...</p></div>;
+    }
+
+    if (error) {
+        return <div className="dashboardPage"><p className="errorText">{error}</p></div>;
+    }
+
     return (
         <div className="dashboardPage">
-            
-
             <main className="dashboardMain">
                 <div className="dashboardTitleRow">
                     <div>
                         <h1 className="dashboardTitle">Panel de Control</h1>
-                        <p className="dashboardSubtitle">Colegio San José · Resumen de residuos</p>
+                        <p className="dashboardSubtitle">{user?.nombre || 'Colegio'} · Resumen de residuos</p>
                     </div>
                     <div className="dashboardStats">
                         <div className="dashboardStat">
-                            <span className="dashboardStatNum">6</span>
+                            <span className="dashboardStatNum">{wasteTypes.length}</span>
                             <span className="dashboardStatLabel">Tipos</span>
                         </div>
                         <div className="dashboardStat">
-                            <span className="dashboardStatNum">170kg</span>
+                            <span className="dashboardStatNum">{totalKg}kg</span>
                             <span className="dashboardStatLabel">Total</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="wasteGrid">
-                    {WASTE_TYPES.map(w => (
-                        <WasteCard key={w.code} {...w} />
+                    {wasteTypes.map(w => (
+                        <WasteCard key={w.id} {...w} />
                     ))}
                 </div>
 
                 <ServiceSection />
                 <NextPickupCard />
-                <BottomControls />
+                <BottomControls
+                    onAddClick={() => setModalAbierto(true)}
+                    onHistoryClick={() => navigate('/wasteform')}
+                />
+                <WasteModal
+                    isOpen={modalAbierto}
+                    onClose={() => setModalAbierto(false)}
+                    onSuccess={fetchData}
+                />
             </main>
-
-            
         </div>
     );
 }

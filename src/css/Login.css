@@ -1,0 +1,145 @@
+.login-container {
+  min-height: 80vh;
+  background-color: #f4f6f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: "Inter", sans-serif;
+}
+
+.login-container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1d2b1f;
+  margin-bottom: 8px;
+}
+
+.login-container p {
+  font-size: 14px;
+  color: #6b6f6b;
+  margin-bottom: 30px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #1d2b1f;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #ffffff;
+  transition: 0.2s ease;
+}
+
+.input-wrapper input:focus {
+  border-color: #00d23f;
+  box-shadow: 0 0 0 3px rgba(0, 210, 63, 0.1);
+  outline: none;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #9ca3af;
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+
+.input-wrapper:focus-within .input-icon {
+  color: #00d23f;
+}
+
+.error {
+  font-size: 12px;
+  color: #e53935;
+  margin-top: 4px;
+}
+
+.server-error {
+  font-size: 13px;
+  color: #e53935;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #00d23f;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.login-btn:hover {
+  background-color: #00b837;
+}
+
+.login-btn:disabled {
+  background-color: #9be8b5;
+  cursor: not-allowed;
+}
+
+.register-redirect {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6b6f6b;
+  text-align: center;
+}
+
+.register-link {
+  color: #00d23f;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 20px;
+  }
+
+  .login-container h1 {
+    font-size: 24px;
+  }
+}

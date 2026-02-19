@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { auth } from "../services/api";
-import "../css/Register.css"; // Reutilizamos los estilos
+import "../css/Login.css";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -36,7 +38,6 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
@@ -48,35 +49,33 @@ function Login() {
 
         try {
             console.log("Intentando login con:", formData);
+            const response = await auth.login(formData);
+            console.log("Login exitoso:", response);
 
-            const result = await auth.login(formData);
+            // Normalizamos la respuesta para el contexto
+            const userData = {
+                id: response.colegio_id,
+                nombre: response.colegio_nombre,
+                email: formData.email
+            };
 
-            console.log("Login exitoso:", result);
-
-            // Guardar en localStorage
-            localStorage.setItem("colegio", JSON.stringify(result));
-
-            alert(`✅ ¡Bienvenido ${result.colegio_nombre}!`);
-
-            // Redirigir al dashboard
+            login(userData);
+            alert(`✅ ¡Bienvenido ${response.colegio_nombre}! 👋`);
             navigate("/dashboard");
-
         } catch (error) {
             console.error("Error en login:", error);
-            setServerError(
-                error.message || "Credenciales incorrectas. Verifica tu email y contraseña."
-            );
+            setServerError(error.message || "Error al iniciar sesión. Verifica tus credenciales.");
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="register-container">
-            <h1>Iniciar sesión</h1>
-            <p>Accede a tu panel de control de residuos</p>
+        <div className="login-container">
+            <h1>Inicia sesión</h1>
+            <p>Accede a tu panel de control de EcoTrack</p>
 
-            <form onSubmit={handleSubmit} noValidate>
+            <form className="login-form" onSubmit={handleSubmit} noValidate>
                 <div className="form-group">
                     <label>Correo electrónico *</label>
                     <div className="input-wrapper">
@@ -100,7 +99,7 @@ function Login() {
                         <input
                             type="password"
                             name="password"
-                            placeholder="Tu contraseña"
+                            placeholder="******"
                             value={formData.password}
                             onChange={handleChange}
                             disabled={loading}
@@ -110,35 +109,18 @@ function Login() {
                 </div>
 
                 {serverError && (
-                    <div
-                        className="server-error"
-                        style={{
-                            color: "#dc2626",
-                            background: "#fee2e2",
-                            padding: "12px",
-                            borderRadius: "8px",
-                            marginBottom: "15px",
-                            fontSize: "14px",
-                        }}
-                    >
+                    <div className="server-error" style={{ color: "#dc2626", background: "#fee2e2", padding: "12px", borderRadius: "8px", marginBottom: "15px", fontSize: "14px" }}>
                         ❌ {serverError}
                     </div>
                 )}
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    style={{
-                        opacity: loading ? 0.7 : 1,
-                        cursor: loading ? "not-allowed" : "pointer",
-                    }}
-                >
-                    {loading ? "⏳ Entrando..." : "Iniciar sesión"}
+                <button className="login-btn" type="submit" disabled={loading}>
+                    {loading ? "⏳ Iniciando sesión..." : "Iniciar sesión"}
                 </button>
 
-                <p className="login-redirect">
+                <p className="register-redirect">
                     ¿No tienes cuenta?{" "}
-                    <Link to="/register" className="login-link">
+                    <Link to="/register" className="register-link">
                         Regístrate aquí
                     </Link>
                 </p>
