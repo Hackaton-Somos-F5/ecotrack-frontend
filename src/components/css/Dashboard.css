@@ -1,0 +1,400 @@
+/* ============================================
+   DASHBOARD PAGE
+   ============================================ */
+.dashboardPage {
+    min-height: 100vh;
+    background: #f4f8f5;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardMain {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 32px 28px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* ---- TÍTULO ---- */
+.dashboardTitleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.dashboardTitle {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.dashboardSubtitle {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.dashboardStats {
+    display: flex;
+    gap: 20px;
+}
+
+.dashboardStat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 12px 20px;
+    border: 1.5px solid #e5e7eb;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    min-width: 80px;
+}
+
+.dashboardStatNum {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #2ecc71;
+    line-height: 1;
+}
+
+.dashboardStatLabel {
+    font-size: 0.72rem;
+    color: #9ca3af;
+    font-weight: 500;
+    margin-top: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ---- WASTE GRID ---- */
+.wasteGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* ---- WASTE CARD ---- */
+.wasteCard {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    border: 1.5px solid #f0f0f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.wasteCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.wasteCardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wasteCardIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.wasteCardBadge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.wasteCardBadgeHigh {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.wasteCardBadgeLow {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.wasteCardLabel {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1;
+}
+
+.wasteCardCode {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #9ca3af;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.wasteCardBarTrack {
+    height: 6px;
+    background: #f3f4f6;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.wasteCardBarFill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wasteCardFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.wasteCardPct {
+    font-size: 1.1rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.wasteCardBtn {
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: filter 0.15s, transform 0.15s;
+    white-space: nowrap;
+}
+
+.wasteCardBtn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* ---- SERVICE SECTION ---- */
+.serviceSection {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.serviceSectionTitle {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #111827;
+}
+
+.serviceGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.serviceCard {
+    background: white;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 18px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    text-align: center;
+}
+
+.serviceCard:hover {
+    border-color: #2ecc71;
+    background: #f0fdf4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(46,204,113,0.15);
+}
+
+.serviceCardIcon {
+    font-size: 1.6rem;
+}
+
+.serviceCardLabel {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.serviceCardDesc {
+    font-size: 0.72rem;
+    color: #9ca3af;
+    line-height: 1.3;
+}
+
+/* ---- NEXT PICKUP CARD ---- */
+.nextPickupCard {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 1.5px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-left: 4px solid #2ecc71;
+}
+
+.nextPickupLeft {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nextPickupIcon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.nextPickupTitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 3px;
+}
+
+.nextPickupDate {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 3px;
+}
+
+.nextPickupSub {
+    font-size: 0.82rem;
+    color: #6b7280;
+}
+
+.nextPickupBadge {
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ---- BOTTOM CONTROLS ---- */
+.bottomControls {
+    display: flex;
+    gap: 12px;
+}
+
+.bottomBtn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+}
+
+.bottomBtnPrimary {
+    background: #2ecc71;
+    color: white;
+    box-shadow: 0 4px 12px rgba(46,204,113,0.3);
+}
+
+.bottomBtnPrimary:hover {
+    background: #27ae60;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(46,204,113,0.4);
+}
+
+.bottomBtnSecondary {
+    background: white;
+    color: #374151;
+    border: 1.5px solid #e5e7eb;
+}
+
+.bottomBtnSecondary:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+    .wasteGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .serviceGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboardMain {
+        padding: 20px 16px 40px;
+        gap: 20px;
+    }
+
+    .wasteGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .serviceGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboardTitle {
+        font-size: 1.4rem;
+    }
+
+    .nextPickupCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bottomControls {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+    .wasteGrid {
+        grid-template-columns: 1fr;
+    }
+}
