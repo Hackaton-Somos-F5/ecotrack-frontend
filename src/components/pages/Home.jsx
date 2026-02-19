@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../css/Home.css';
 
-
 function Hero() {
     return (
         <section className="hero">
@@ -21,15 +20,14 @@ function Hero() {
                     <Link to="/register" className="btnPrimary">
                         Únete a la revolución
                     </Link>
-                    <a href="#quienes-somos" className="btnOutline">
+                    <a href="#quienesSomos" className="btnOutline">
                         Saber más
                     </a>
                 </div>
             </div>
             <div className="heroVisual">
-    <img src="src/img/logoSinFondo.png" alt="EcoCole logo" className="heroLogo"/>
-</div>
-
+                <img src="src/img/logoSinFondo.png" alt="EcoCole logo" className="heroLogo"/>
+            </div>
         </section>
     );
 }
@@ -166,7 +164,7 @@ export default function Home() {
             <MisionImpacto />
             <ComoReciclar />
             <CtaFinal />
-            <Footer />
+            
         </div>
     );
 }
