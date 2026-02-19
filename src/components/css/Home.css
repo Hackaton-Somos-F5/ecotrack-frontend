@@ -1,0 +1,412 @@
+/* === HOME CSS - FULL WIDTH HERO CENTRADO === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #111827;
+    background: #FAF9F6;
+    overflow-x: hidden;
+}
+
+/* === VARIABLES === */
+:root {
+    --ivory: #FAF9F6;
+    --white-pure: #FFFFFF;
+    --black: #111827;
+    --gray-dark: #374151;
+    --gray-light: #9ca3af;
+    --radius-lg: 16px;
+}
+
+/* Layout */
+.pageWrapper {
+    min-height: 100vh;
+    background: var(--ivory);
+    width: 100%;
+}
+
+/* CONTENIDO INTERNO - MAX ANCHO LEGIBLE */
+.contentWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.section {
+    padding: 60px 0;
+    background: var(--ivory);
+    width: 100%;
+}
+
+/* Labels y títulos */
+.sectionLabel {
+    display: inline-block;
+    color: var(--black);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border: 2px solid #f1f1f1;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+.sectionTitle {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.sectionText {
+    font-size: 1.15rem;
+    color: var(--gray-dark);
+    max-width: 700px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+}
+
+/* === HERO FULL WIDTH CENTRADO === */
+.hero {
+    min-height: 100vh;
+    background: #439b31;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroBgCircle {
+    position: absolute;
+    top: -15%;
+    right: -15%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle at 30% 30%, rgba(67, 155, 49, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* WRAPPER INTERNO HERO - PERFECTAMENTE CENTRADO */
+.heroInner {
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.heroContent {
+    max-width: 600px;
+    flex: 1;
+    color: white;
+}
+
+.heroTitle {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.heroSubtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 550px;
+}
+
+.heroCta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btnPrimary {
+    background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+    color: white;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+}
+
+.btnPrimary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
+}
+
+.btnOutline {
+    color: white;
+    padding: 16px 32px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.btnOutline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.heroVisual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+}
+
+.heroLogo {
+    max-width: 320px;
+    height: auto;
+    width: 100%;
+}
+
+/* === SECCIONES BLANCAS === */
+.sectionWho {
+    background: var(--ivory);
+    text-align: center;
+}
+
+.sectionMision {
+    background: var(--ivory);
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.misionCard {
+    background: var(--white-pure);
+    border: 2px solid #f8f9fa;
+    border-radius: var(--radius-lg);
+    padding: 40px 28px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.misionCard:hover {
+    transform: translateY(-4px);
+    border-color: #e9ecef;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.cardIcon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--black);
+}
+
+.misionCard h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 16px;
+}
+
+.misionCard p {
+    color: var(--gray-dark);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* === CÓMO RECICLAR === */
+.sectionReciclar {
+    background: var(--ivory);
+    text-align: center;
+}
+
+.pasosGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    margin-top: 48px;
+}
+
+.pasoCard {
+    background: var(--white-pure);
+    border: 2px solid #f8f9fa;
+    border-radius: var(--radius-lg);
+    padding: 40px 24px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.pasoCard:hover {
+    transform: translateY(-4px);
+    border-color: #e9ecef;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.pasoNum {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: var(--black);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.3);
+}
+
+.pasoIcon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--black);
+}
+
+.pasoCard h4 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 12px;
+}
+
+.pasoCard p {
+    color: var(--gray-dark);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* === CTA FINAL FULL WIDTH === */
+.sectionCta {
+    background: linear-gradient(135deg, #439b31 0%, #2e7d23 100%);
+    color: white;
+    text-align: center;
+    padding: 80px 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.sectionCta .sectionLabel {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sectionCta .sectionTitle {
+    color: white;
+}
+
+.sectionCta .sectionText {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .contentWrapper {
+        padding: 0 16px;
+    }
+
+    .section {
+        padding: 48px 0;
+    }
+
+    /* HERO MÓVIL CENTRADO */
+    .hero {
+        padding: 60px 0;
+        flex-direction: column;
+    }
+
+    .heroInner {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 0 16px;
+    }
+
+    .heroContent {
+        order: 2;
+        width: 100%;
+    }
+
+    .heroVisual {
+        order: 1;
+    }
+
+    .heroLogo {
+        max-width: 260px;
+    }
+
+    .heroCta {
+        justify-content: center;
+    }
+
+    .grid2 {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .pasosGrid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sectionTitle {
+        font-size: 1.8rem;
+    }
+
+    .btnPrimary,
+    .btnOutline {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+    }
+
+    .pasoNum {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+        top: 16px;
+        right: 16px;
+    }
+
+    .heroInner {
+        gap: 32px;
+    }
+}
