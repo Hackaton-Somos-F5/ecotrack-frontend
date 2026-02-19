@@ -1,101 +1,124 @@
+/* === HOME CSS - BLANCO MARFIL MINIMALISTA RESPONSIVE === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #111827;
+    background: #FAF9F6;
+    /* ← BLANCO MARFIL */
+}
+
+/* === VARIABLES === */
+:root {
+    --ivory: #FAF9F6;
+    /* Fondo principal marfil */
+    --white-pure: #FFFFFF;
+    /* Cards blancas puras */
+    --black: #111827;
+    --gray-dark: #374151;
+    --gray-light: #9ca3af;
+    --radius-lg: 16px;
+}
+
+/* Layout */
+.pageWrapper {
+    min-height: 100vh;
+    background: var(--ivory);
+}
+
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 0 20px;
+    /* ← PADDING REDUCIDO */
 }
 
 .section {
-    padding: 100px 0;
+    padding: 60px 0;
+    /* ← PADDING REDUCIDO 40% */
+    background: var(--ivory);
 }
 
-/* --- VARIABLES DE COLOR (NUEVA PALETA AZUL) --- */
-:root {
-    --blue-primary: #ffffff;
-;
-    --blue-dark:#ffffff ;
-    --dark: #1F2937;
-    --white: #ffffff;
-    --off-white: #2b75be;
-    --gray-light: white;
-    --gray-mid: #6B7280;
-    --black: #111827;
-    --radius-lg: 16px;
-    --font-display: 'Inter', -apple-system, sans-serif;
+/* Labels y títulos */
+.sectionLabel {
+    display: inline-block;
+    color: var(--black);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    /* ← MÁS COMPACTO */
+    border: 2px solid #f1f1f1;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
 }
 
-/* --- HERO --- */
+.sectionTitle {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.sectionText {
+    font-size: 1.15rem;
+    color: var(--gray-dark);
+    max-width: 700px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+}
+
+/* === HERO === */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 64px;
-    padding-top: 80px;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 48px;
+    background: #439b31;
     position: relative;
     overflow: hidden;
-    background:#439b31;
-    text-color: #1e4fd6;
+    padding: 80px 20px;
+    /* ← RESPONSIVE */
 }
 
 .heroBgCircle {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    top: -15%;
+    right: -15%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle at 30% 30%, rgba(67, 155, 49, 0.15) 0%, transparent 70%);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(30, 58, 138, 0.15) 0%, transparent 70%);
-    top: 50%;
-    right: -100px;
-    transform: translateY(-50%);
-    pointer-events: none;
+    z-index: 1;
 }
 
 .heroContent {
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
     flex: 1;
-    max-width: 560px;
-    animation: fadeUp 0.8s ease both;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    color: white;
 }
 
 .heroTitle {
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 4vw, 3.5rem);
-    font-weight: 800;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
     line-height: 1.1;
-    margin: 16px 0 20px;
-    color: var(--white);
-}
-
-.heroTitle em {
-    font-style: normal;
-    color: var(--white);
-    position: relative;
-    background: linear-gradient(45deg, #60A5FA, #3B82F6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    margin-bottom: 24px;
 }
 
 .heroSubtitle {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.7;
-    margin-bottom: 36px;
-    max-width: 460px;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 550px;
 }
 
 .heroCta {
@@ -104,330 +127,226 @@
     flex-wrap: wrap;
 }
 
-/* BOTONES */
-.btnPrimary,
-.btnOutline {
-    padding: 16px 32px;
-    border-radius: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
 .btnPrimary {
-    background: linear-gradient(45deg, #3B82F6, #1D4ED8);
+    background: linear-gradient(135deg, #3B82F6, #1D4ED8);
     color: white;
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+    padding: 16px 32px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
 }
 
 .btnPrimary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+    box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
 }
 
 .btnOutline {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.9);
+    color: white;
+    padding: 16px 32px;
     border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    background: transparent;
 }
 
 .btnOutline:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.6);
+    border-color: white;
 }
 
-/* --- Hero Visual --- */
 .heroVisual {
     flex: 1;
-    max-width: 380px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    animation: fadeUp 0.8s 0.2s ease both;
-}
-
-.ecoBadge {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-.ecoLeaf {
-    font-size: 5rem;
+    align-items: center;
+    position: relative;
     z-index: 2;
-    filter: drop-shadow(0 8px 16px rgba(59, 130, 246, 0.4));
-    animation: pulse 3s ease-in-out infinite;
 }
 
-@keyframes pulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
+.heroLogo {
+    max-width: 320px;
+    height: auto;
 }
 
-.ecoRing {
-    position: absolute;
-    border-radius: 50%;
-    border: 2px solid rgba(59, 130, 246, 0.3);
-    animation: ringPulse 3s ease-in-out infinite;
-}
-
-.ecoRing1 {
-    width: 140px;
-    height: 140px;
-    animation-delay: 0s;
-}
-
-.ecoRing2 {
-    width: 180px;
-    height: 180px;
-    animation-delay: 0.5s;
-    opacity: 0.6;
-}
-
-.ecoRing3 {
-    width: 220px;
-    height: 220px;
-    animation-delay: 1s;
-    opacity: 0.3;
-}
-
-@keyframes ringPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: inherit;
-    }
-
-    50% {
-        transform: scale(1.04);
-    }
-}
-
-.ecoLogoText {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    color: var(--white);
-}
-
-.ecoTagline {
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 500;
-}
-
-/* --- SECCIÓN QUIÉNES SOMOS --- */
+/* === SECCIONES BLANCAS PLANAS === */
 .sectionWho {
-    background: var(--dark);
-    color: var(--white);
+    background: var(--ivory);
     text-align: center;
-    padding: 80px 32px;
 }
 
-.sectionLabel {
-    color: #60A5FA;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.sectionTitle {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    font-weight: 800;
-    margin: 12px 0 20px;
-}
-
-.sectionText {
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.8;
-    max-width: 640px;
-    margin: 0 auto;
-    color: white;
-}
-
-.sectionWho .sectionTitle {
-    color: var(--white);
-}
-
-/* --- MISIÓN E IMPACTO --- */
 .sectionMision {
-    background: var(--white);
+    background: var(--ivory);
 }
 
 .grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    
+    gap: 40px;
+    align-items: start;
 }
 
 .misionCard {
-    transition: transform 0.2s;
-    padding: 32px;
-    background: white;
+    background: var(--white-pure);
+    border: 2px solid #f8f9fa;
     border-radius: var(--radius-lg);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    
+    padding: 40px 28px;
+    /* ← REDUCIDO */
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
 }
 
 .misionCard:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
+    border-color: #e9ecef;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
 }
 
 .cardIcon {
-    font-size: 2.2rem;
-    margin-bottom: 16px;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--black);
 }
 
 .misionCard h3 {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--dark);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 16px;
 }
 
 .misionCard p {
-    color: var(--gray-mid);
-    font-weight: 300;
+    color: var(--gray-dark);
+    font-size: 1rem;
     line-height: 1.7;
 }
 
-/* --- CÓMO RECICLAR --- */
+/* === CÓMO RECICLAR === */
 .sectionReciclar {
-    background: var(--white);
+    background: var(--ivory);
     text-align: center;
-}
-
-.sectionReciclar .sectionTitle {
-    color: var(--dark);
 }
 
 .pasosGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 28px;
     margin-top: 48px;
 }
 
 .pasoCard {
-    background: var(--dark);
+    background: var(--white-pure);
+    border: 2px solid #f8f9fa;
     border-radius: var(--radius-lg);
-    padding: 36px 28px;
-    text-align: left;
+    padding: 40px 24px;
+    /* ← REDUCIDO */
+    text-align: center;
     position: relative;
-    overflow: hidden;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .pasoCard:hover {
     transform: translateY(-4px);
+    border-color: #e9ecef;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
 }
 
 .pasoNum {
-    font-family: var(--font-display);
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: rgba(96, 165, 250, 0.12);
     position: absolute;
-    top: 16px;
+    top: 20px;
     right: 20px;
-    line-height: 1;
+    width: 48px;
+    height: 48px;
+    background: var(--black);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.3);
 }
 
 .pasoIcon {
-    font-size: 2rem;
-    margin-bottom: 16px;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--black);
 }
 
 .pasoCard h4 {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #60A5FA;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 12px;
 }
 
 .pasoCard p {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--gray-light);
-    line-height: 1.6;
+    color: var(--gray-dark);
+    font-size: 1rem;
+    line-height: 1.7;
 }
 
-/* --- CTA FINAL --- */
+/* === CTA FINAL === */
 .sectionCta {
-    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--dark) 100%);
+    background: linear-gradient(135deg, #439b31 0%, #2e7d23 100%);
+    color: white;
     text-align: center;
-}
-
-.sectionCta .sectionTitle,
-.sectionCta .sectionText {
-    color: var(--white);
+    padding: 80px 20px;
 }
 
 .sectionCta .sectionLabel {
-    color: #60A5FA;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sectionCta .sectionTitle {
+    color: white;
 }
 
 .sectionCta .sectionText {
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 36px;
+    color: rgba(255, 255, 255, 0.95);
 }
 
-/* --- FOOTER --- */
+/* === FOOTER === */
 .footer {
     background: var(--black);
-    padding: 40px 0;
+    color: white;
+    padding: 48px 0 24px;
 }
 
 .footerInner {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 32px;
 }
 
 .footerLogo {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    color: var(--white);
+    gap: 12px;
+    font-size: 1.3rem;
+    font-weight: 800;
 }
 
-.footerLogo .logoIcon {
-    background: var(--blue-primary);
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
+.logoIcon {
+    font-size: 2rem;
 }
 
 .footerLinks {
@@ -436,10 +355,10 @@
 }
 
 .footerLinks a {
-    font-size: 0.85rem;
-    color: var(--gray-light);
-    transition: color 0.2s;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
 .footerLinks a:hover {
@@ -447,40 +366,87 @@
 }
 
 .footerCopy {
-    font-size: 0.8rem;
-    color: var(--gray-mid);
+    margin-top: 32px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    width: 100%;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 900px) {
-    .hero {
-        flex-direction: column;
-        padding: 100px 32px 60px;
-        text-align: center;
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
     }
 
-    .heroSubtitle {
-        margin: 0 auto 36px;
+    .section {
+        padding: 48px 0;
+        /* ← MÁS COMPACTO MÓVIL */
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 16px;
+    }
+
+    .heroContent {
+        padding-right: 0;
+        order: 2;
+        margin-top: 32px;
+    }
+
+    .heroVisual {
+        order: 1;
+        margin-bottom: 32px;
+    }
+
+    .heroLogo {
+        max-width: 260px;
     }
 
     .heroCta {
         justify-content: center;
     }
 
-    .heroVisual {
-        display: none;
-    }
-
     .grid2 {
         grid-template-columns: 1fr;
+        gap: 32px;
     }
 
     .pasosGrid {
         grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .pasoCard,
+    .misionCard {
+        padding: 32px 20px;
     }
 
     .footerInner {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .sectionTitle {
+        font-size: 1.8rem;
+    }
+
+    .btnPrimary,
+    .btnOutline {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+    }
+
+    .pasoNum {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+        top: 16px;
+        right: 16px;
     }
 }
