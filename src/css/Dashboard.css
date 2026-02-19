@@ -56,7 +56,7 @@
     border-radius: 12px;
     padding: 12px 20px;
     border: 1.5px solid #e5e7eb;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
     min-width: 80px;
 }
 
@@ -83,117 +83,158 @@
     gap: 16px;
 }
 
+/* ---- GLASS EFFECT ---- */
+.glassEffect {
+    background: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+}
+
 /* ---- WASTE CARD ---- */
 .wasteCard {
-    background: white;
-    border-radius: 16px;
-    padding: 18px;
-    border: 1.5px solid #f0f0f0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    transition: transform 0.15s, box-shadow 0.15s;
+    gap: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
 
 .wasteCard:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12) !important;
+    background: rgba(255, 255, 255, 0.55) !important;
 }
 
 .wasteCardHeader {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 14px;
 }
 
-.wasteCardIcon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+.wasteCardIconBox {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
     flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
-.wasteCardBadge {
-    font-size: 0.65rem;
+.wasteCardEmoji {
+    font-size: 1.5rem;
+}
+
+.wasteCardMainInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.wasteCardTitle {
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 3px 8px;
-    border-radius: 20px;
-    white-space: nowrap;
+    color: #1f2937;
+    margin: 0;
 }
 
-.wasteCardBadgeHigh {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-.wasteCardBadgeLow {
-    background: #d1fae5;
-    color: #065f46;
-}
-
-.wasteCardLabel {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #111827;
-    line-height: 1;
-}
-
-.wasteCardCode {
-    font-size: 0.7rem;
+.wasteCardTag {
+    font-size: 0.75rem;
     font-weight: 600;
-    color: #9ca3af;
-    letter-spacing: 0.08em;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.wasteCardStatus {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 10px;
     text-transform: uppercase;
 }
 
-.wasteCardBarTrack {
-    height: 6px;
-    background: #f3f4f6;
-    border-radius: 3px;
+.statusHigh {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+.statusNormal {
+    background: #d1fae5;
+    color: #10b981;
+}
+
+/* ---- CONTENT & PROGRESS ---- */
+.wasteCardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wasteCardStats {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.statsLabel {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.statsValue {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.wasteCardProgress {
+    height: 10px;
+    width: 100%;
+}
+
+.progressTrack {
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
     overflow: hidden;
 }
 
-.wasteCardBarFill {
+.progressFill {
     height: 100%;
-    border-radius: 3px;
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 5px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.wasteCardFooter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 2px;
-}
-
-.wasteCardPct {
-    font-size: 1.1rem;
-    font-weight: 800;
-    line-height: 1;
-}
-
-.wasteCardBtn {
+/* ---- BUTTON ---- */
+.wasteCardButton {
     border: none;
     color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.72rem;
+    padding: 12px;
+    border-radius: 14px;
+    font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
     font-family: inherit;
-    transition: filter 0.15s, transform 0.15s;
-    white-space: nowrap;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.wasteCardBtn:hover {
+.wasteCardButton:hover {
     filter: brightness(1.1);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.wasteCardButton:active {
+    transform: translateY(0);
 }
 
 /* ---- SERVICE SECTION ---- */
@@ -234,7 +275,7 @@
     border-color: #2ecc71;
     background: #f0fdf4;
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(46,204,113,0.15);
+    box-shadow: 0 4px 16px rgba(46, 204, 113, 0.15);
 }
 
 .serviceCardIcon {
@@ -259,7 +300,7 @@
     border-radius: 16px;
     padding: 20px 24px;
     border: 1.5px solid #e5e7eb;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -331,13 +372,13 @@
 .bottomBtnPrimary {
     background: #2ecc71;
     color: white;
-    box-shadow: 0 4px 12px rgba(46,204,113,0.3);
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
 }
 
 .bottomBtnPrimary:hover {
     background: #27ae60;
     transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(46,204,113,0.4);
+    box-shadow: 0 6px 18px rgba(46, 204, 113, 0.4);
 }
 
 .bottomBtnSecondary {
@@ -397,4 +438,21 @@
     .wasteGrid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ---- LOADING & ERROR STATES ---- */
+.loadingText,
+.errorText {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.loadingText {
+    color: #2ecc71;
+}
+
+.errorText {
+    color: #ef4444;
 }
