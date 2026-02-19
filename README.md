@@ -120,7 +120,7 @@ Proyecto desarrollado por estudiantes con el objetivo de aportar **soluciones te
 GitHub: [https://github.com/webermuros1-oss](https://github.com/webermuros1-oss)<br>
 LinkedIn: [https://www.linkedin.com/in/heber-paris-caama%C3%B1o/](https://www.linkedin.com/in/heber-paris-caama%C3%B1o/)
 
-**Geraldine Saco**
+**Geraldine Saco**<br>
 GitHub: [https://github.com/GeraldineSaco](https://github.com/GeraldineSaco)<br>
 LinkedIn: [https://www.linkedin.com/in/geraldine-saco](https://www.linkedin.com/in/geraldine-saco)
 
@@ -128,7 +128,7 @@ LinkedIn: [https://www.linkedin.com/in/geraldine-saco](https://www.linkedin.com/
 GitHub: [https://github.com/lorenasferreira](https://github.com/lorenasferreira)<br>
 LinkedIn: [https://www.linkedin.com/in/lorenasferreira](https://www.linkedin.com/in/lorenasferreira)
 
-**Kevin Gerardo Ruiz Gutierrez**
+**Kevin Gerardo Ruiz Gutierrez**<br>
 GitHub: [https://github.com/Kevingedev](https://github.com/kevingedev)<br>
 LinkedIn: [https://www.linkedin.com/in/kevinruizgutierrez](https://www.linkedin.com/in/kevinruizgutierrez)
 
