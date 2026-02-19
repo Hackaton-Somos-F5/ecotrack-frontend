@@ -1,4 +1,8 @@
 * {
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+/* === RESET GLOBAL === */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -24,4 +28,71 @@ body {
   background-color: var(--color-background);
   min-height: 100vh;
   color: var(--color-text-primary);
+  --green-primary: #2ECC71;
+  --green-dark: #1a8a4a;
+  --green-light: #d4f5e4;
+  --green-accent: #00FF87;
+  --black: #0d0d0d;
+  --dark: #111a14;
+  --gray-dark: #1e2b22;
+  --gray-mid: #3a4a3e;
+  --gray-light: #8fa393;
+  --white: #f5f9f6;
+  --off-white: #e8f2eb;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.12);
+  --shadow-green: 0 4px 24px rgba(46,204,113,0.25);
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #FAF9F6;
+  color: #111827;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* SIN display:flex — eso lo ponía Vite y rompía el layout */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--off-white);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--green-primary);
+  border-radius: 3px;
+}}

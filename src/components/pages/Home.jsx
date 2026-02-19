@@ -5,28 +5,36 @@ function Hero() {
     return (
         <section className="hero">
             <div className="heroBgCircle" />
-            <div className="heroContent">
-                <span className="sectionLabel">Smart Resource Flow</span>
-                <h1 className="heroTitle">
-                    Cuidando vuestro colegio,<br />
-                    <em>protegiendo</em><br />
-                    vuestro planeta
-                </h1>
-                <p className="heroSubtitle">
-                    Transformamos hábitos escolares en acciones reales.
-                    Cada residuo recogido es un paso hacia un futuro más limpio.
+            <div className="heroInner">
+                <div className="heroContent">
+                    <span className="sectionLabel">Smart Resource Flow</span>
+                    <h1 className="heroTitle">
+                        Cuidando vuestro colegio,<br />
+                        protegiendo<br />
+                        vuestro planeta
+                    </h1>
+                    <p className="heroSubtitle">
+                        Transformamos hábitos escolares en acciones reales.
+                        Cada residuo recogido es un paso hacia un futuro más limpio.
+                    </p>
+                    <p className="sectionText">
+                    ¿Listo para convertir tu colegio en un agente del cambio?<br />
+                    Regístrate y empieza a marcar la diferencia hoy.
                 </p>
-                <div className="heroCta">
-                    <Link to="/register" className="btnPrimary">
-                        Únete a la revolución
-                    </Link>
-                    <a href="#quienesSomos" className="btnOutline">
-                        Saber más
-                    </a>
+                    <div className="heroCta">
+                        <Link to="/register" className="btnPrimary">
+                            Únete a la revolución y regístrate ahora
+                        </Link>
+                        
+                    </div>
                 </div>
-            </div>
-            <div className="heroVisual">
-                <img src="src/img/logoSinFondo.png" alt="EcoCole logo" className="heroLogo"/>
+                <div className="heroVisual">
+                    <img
+                        src="src/img/logoSinFondo.png"
+                        alt="EcoCole logo"
+                        className="heroLogo"
+                    />
+                </div>
             </div>
         </section>
     );
@@ -35,7 +43,7 @@ function Hero() {
 function QuienesSomos() {
     return (
         <section id="quienes-somos" className="section sectionWho">
-            <div className="container">
+            <div className="contentWrapper">
                 <span className="sectionLabel">Sobre nosotros</span>
                 <h2 className="sectionTitle">¿Quiénes somos?</h2>
                 <p className="sectionText">
@@ -51,7 +59,7 @@ function QuienesSomos() {
 function MisionImpacto() {
     return (
         <section id="mision" className="section sectionMision">
-            <div className="container grid2">
+            <div className="contentWrapper grid2">
                 <div className="misionCard">
                     <div className="cardIcon">🎯</div>
                     <h3>Nuestra Misión</h3>
@@ -99,7 +107,7 @@ function ComoReciclar() {
 
     return (
         <section id="como-reciclar" className="section sectionReciclar">
-            <div className="container">
+            <div className="contentWrapper">
                 <span className="sectionLabel">Guía rápida</span>
                 <h2 className="sectionTitle">¿Cómo reciclar?</h2>
                 <div className="pasosGrid">
@@ -120,39 +128,16 @@ function ComoReciclar() {
 function CtaFinal() {
     return (
         <section className="section sectionCta">
-            <div className="container">
+            <div className="contentWrapper">
                 <span className="sectionLabel">Únete ahora</span>
                 <h2 className="sectionTitle">Únete a la Revolución</h2>
                 <p className="sectionText">
-                    ¿Listo para convertir tu colegio en un agente del cambio?<br />
-                    Regístrate y empieza a marcar la diferencia hoy.
+                    ¿Preparados para el cambio? Cada colegio que se une a EcoCole es un paso más hacia un planeta más limpio y saludable.
+                    Emieza a marcar la diferencia hoy.
                 </p>
-                <Link to="/register" className="btnPrimary">
-                    Solicitar información
-                </Link>
+                
             </div>
         </section>
-    );
-}
-
-function Footer() {
-    return (
-        <footer className="footer">
-            <div className="container footerInner">
-                <div className="footerLogo">
-                    <span className="logoIcon">♻</span>
-                    <span>
-                        ECO<strong>COLE</strong>
-                    </span>
-                </div>
-                <div className="footerLinks">
-                    <a href="#quienes-somos">Quiénes somos</a>
-                    <a href="#mision">Misión</a>
-                    <a href="#como-reciclar">Cómo reciclar</a>
-                </div>
-                <p className="footerCopy">© 2024 EcoCole · Smart Resource Flow</p>
-            </div>
-        </footer>
     );
 }
 
@@ -164,7 +149,6 @@ export default function Home() {
             <MisionImpacto />
             <ComoReciclar />
             <CtaFinal />
-            
         </div>
     );
 }

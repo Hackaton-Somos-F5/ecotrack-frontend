@@ -1,0 +1,63 @@
+/* App.css — limpio, sin restricciones de Vite */
+
+/* El #root NO debe tener max-width ni padding ni text-align
+   porque impide que el header ocupe el 100% de pantalla */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Utility classes */
+.btn-primary {
+  background: var(--green-primary);
+  color: var(--black);
+  border: none;
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-green);
+}
+
+.btn-primary:hover {
+  background: var(--green-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(46,204,113,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--green-primary);
+  border: 2px solid var(--green-primary);
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: var(--green-primary);
+  color: var(--black);
+}
+
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green-primary);
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(46,204,113,0.1);
+}

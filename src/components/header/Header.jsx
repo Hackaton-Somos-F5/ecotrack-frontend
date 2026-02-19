@@ -3,26 +3,29 @@ import './Header.css';
 export default function Header({ userName = "Usuario", notificaciones = 1 }) {
     return (
         <header className="headerBar">
+
             {/* Logo izquierda */}
             <div className="headerLogo">
                 <div className="headerLogoCircle">
-                    {/* IMAGEN POR DELANTE Y CENTRADA */}
-                    <img 
+                    {/* Círculo giratorio verde */}
+                    <div className="circleOverlay" />
+                    {/* Logo encima del círculo */}
+                    <img
                         src="/src/img/logoSinFondo.png"
                         alt="EcoCole Logo"
                         className="logoImage"
                     />
-                    
                 </div>
-                
+
                 <div className="headerLogoText">
-                    <span className="headerLogoName">ECO COLE</span>
+                    <span className="headerLogoName">ECO<strong>COLE</strong></span>
                     <span className="headerLogoTagline">Smart Resource Flow</span>
                 </div>
             </div>
 
             {/* Acciones derecha */}
             <div className="headerActions">
+
                 {/* Campana */}
                 <button className="headerNotifBtn" aria-label="Notificaciones">
                     <svg className="headerBell" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +46,9 @@ export default function Header({ userName = "Usuario", notificaciones = 1 }) {
                         />
                     </svg>
                     {notificaciones > 0 && (
-                        <span className="headerNotifDot">{notificaciones > 9 ? '9+' : notificaciones}</span>
+                        <span className="headerNotifDot">
+                            {notificaciones > 9 ? '9+' : notificaciones}
+                        </span>
                     )}
                 </button>
 
