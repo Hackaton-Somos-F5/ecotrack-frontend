@@ -36,8 +36,8 @@
     gap: 48px;
     position: relative;
     overflow: hidden;
-    background:#21810d;
-    text-color: #1D4ED8;
+    background:#439b31;
+    text-color: #1e4fd6;
 }
 
 .heroBgCircle {
@@ -263,7 +263,7 @@
     line-height: 1.8;
     max-width: 640px;
     margin: 0 auto;
-    color: var(--gray-light);
+    color: white;
 }
 
 .sectionWho .sectionTitle {
