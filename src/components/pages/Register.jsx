@@ -2,7 +2,6 @@ import { useState } from "react";
 import { registerUser } from "../services/api";
 import "../css/Register.css";
 import {
-  FaUser,
   FaEnvelope,
   FaSchool,
   FaLock,
@@ -18,12 +17,9 @@ function Register() {
     direccion: "",
     ciudad: "",
     telefono: "",
-
-    nombreDirector: "",
     email: "",
     password: "",
     confirmPassword: "",
-
     acceptedTerms: false,
   });
 
@@ -48,11 +44,6 @@ function Register() {
 
     if (!formData.telefono.trim()) {
       newErrors.telefono = "El teléfono es obligatorio";
-    }
-
-    if (!formData.nombreDirector.trim()) {
-      newErrors.nombreDirector =
-        "El nombre del director/docente es obligatorio";
     }
 
     if (!formData.email.trim()) {
@@ -115,7 +106,6 @@ function Register() {
         direccion: "",
         ciudad: "",
         telefono: "",
-        nombreDirector: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -201,23 +191,6 @@ function Register() {
         <h3>Datos de acceso</h3>
 
         <div className="form-group">
-          <label>Nombre del director/docente</label>
-          <div className="input-wrapper">
-            <FaUser className="input-icon" />
-            <input
-              type="text"
-              name="nombreDirector"
-              placeholder="Ej. Harry Potter"
-              value={formData.nombreDirector}
-              onChange={handleChange}
-            />
-          </div>
-          {errors.nombreDirector && (
-            <span className="error">{errors.nombreDirector}</span>
-          )}
-        </div>
-
-        <div className="form-group">
           <label>Correo electrónico</label>
           <div className="input-wrapper">
             <FaEnvelope className="input-icon" />
@@ -279,8 +252,6 @@ function Register() {
         {errors.acceptedTerms && (
           <span className="error">{errors.acceptedTerms}</span>
         )}
-
-        {serverError && <p className="server-error">{serverError}</p>}
 
         {serverError && <p className="server-error">{serverError}</p>}
 
