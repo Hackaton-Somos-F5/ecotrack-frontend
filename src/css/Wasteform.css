@@ -33,7 +33,7 @@
     margin-bottom: 30px;
     position: sticky;
     top: 20px;
-    z-index: 100;
+    z-index: 50;
 }
 
 .backBtn {
@@ -133,6 +133,30 @@
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 24px;
     width: 100%;
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 12px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.residuaCardSkeleton {
+    height: 250px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.5);
 }
 
 /* Tarjeta de Residuo */
@@ -272,33 +296,46 @@
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Floating Action Button */
+/* Floating Action Button (FAB) System */
+.fabContainer {
+    position: sticky;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 500;
+    margin-top: 50px;
+    /* Margen para que al final no toque el footer */
+}
+
 .fabBtn {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    pointer-events: auto;
     width: 68px;
     height: 68px;
-    background: #2ecc71;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
     color: white;
     border: none;
     border-radius: 22px;
     font-size: 2.4rem;
     font-weight: 300;
     cursor: pointer;
-    box-shadow: 0 12px 36px rgba(46, 204, 113, 0.35);
+    box-shadow: 0 12px 36px rgba(46, 204, 113, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 500;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .fabBtn:hover {
-    transform: translateX(-50%) translateY(-6px) scale(1.08);
-    background: #27ae60;
-    box-shadow: 0 18px 45px rgba(46, 204, 113, 0.45);
+    transform: translateY(-8px) scale(1.1);
+    background: #2ecc71;
+    box-shadow: 0 20px 45px rgba(46, 204, 113, 0.5);
+    filter: brightness(1.05);
+}
+
+.fabBtn:active {
+    transform: scale(0.95);
 }
 
 /* --- Responsive --- */
@@ -310,5 +347,15 @@
 
     .residuosList {
         grid-template-columns: 1fr;
+    }
+
+    .fabBtn {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    .fabContainer {
+        bottom: 20px;
     }
 }

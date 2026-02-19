@@ -91,10 +91,10 @@ function NextPickupCard() {
 function BottomControls({ onAddClick, onHistoryClick }) {
     return (
         <div className="bottomControls">
-            <button className="bottomBtn bottomBtnPrimary glassEffect" onClick={onAddClick}>
+            <button className="bottomBtn bottomBtnPrimary" onClick={onAddClick}>
                 <span className="btnIcon">➕</span> Añadir residuo
             </button>
-            <button className="bottomBtn bottomBtnSecondary glassEffect" onClick={onHistoryClick}>
+            <button className="bottomBtn bottomBtnSecondary" onClick={onHistoryClick}>
                 <span className="btnIcon">📋</span> Ver historial
             </button>
         </div>

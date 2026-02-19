@@ -92,7 +92,21 @@ export default function Residuos() {
         return coincideFiltro && coincideBusqueda;
     });
 
-    if (loading) return <div className="residuosPage"><p className="emptyState">Cargando residuos...</p></div>;
+    if (loading) {
+        return (
+            <div className="residuosPage">
+                <div className="residuosTopBar glassEffect">
+                    <button className="backBtn" onClick={() => window.history.back()}>←</button>
+                    <h1 className="residuosTitle">Cargando...</h1>
+                </div>
+                <div className="residuosList">
+                    {[1, 2, 3, 4, 5, 6].map(i => (
+                        <div key={i} className="residuaCardSkeleton skeleton" />
+                    ))}
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="residuosPage">
@@ -139,9 +153,11 @@ export default function Residuos() {
             </div>
 
             {/* Botón flotante */}
-            <button className="fabBtn" onClick={() => setModalAbierto(true)} aria-label="Añadir residuo">
-                +
-            </button>
+            <div className="fabContainer">
+                <button className="fabBtn" onClick={() => setModalAbierto(true)} aria-label="Añadir residuo">
+                    +
+                </button>
+            </div>
 
             {/* Modal */}
             <WasteModal
