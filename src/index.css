@@ -2,7 +2,6 @@
 * {
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
-/* === RESET GLOBAL === */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -69,7 +68,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   overflow-x: hidden;
-  /* SIN display:flex — eso lo ponía Vite y rompía el layout */
 }
 
 a {
@@ -86,7 +84,6 @@ input, select, textarea {
   font-family: var(--font-body);
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }

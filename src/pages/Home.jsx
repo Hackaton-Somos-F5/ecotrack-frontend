@@ -30,7 +30,7 @@ function Hero() {
                 </div>
                 <div className="heroVisual">
                     <img
-                        src="src/img/logoSinFondo.png"
+                        src="./src/assets/logoSinFondo.png"
                         alt="EcoCole logo"
                         className="heroLogo"
                     />

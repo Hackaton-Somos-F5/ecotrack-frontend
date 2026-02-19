@@ -1,12 +1,13 @@
-
+//import Header from '../header/Header';
+//import Footer from '../footer/Footer';
 import '../css/Dashboard.css';
 
 const WASTE_TYPES = [
-    { code: 'ORGANIC',  label: 'Orgánico',  percentage: 45,  icon: '🥬', color: '#f59e0b', bg: '#fef3c7' },
-    { code: 'PLASTIC',  label: 'Plástico',  percentage: 92,  icon: '♻️', color: '#2ecc71', bg: '#d1fae5' },
+    { code: 'ORGANIC',  label: 'Orgánico',  percentage: 45,  icon: '🥬', color: '#815c1b', bg: '#fef3c7' },
+    { code: 'PLASTIC',  label: 'Plástico',  percentage: 92,  icon: '♻️', color: '#eae30efa', bg: '#f9fad1' },
     { code: 'PAPER',    label: 'Papel',     percentage: 40,  icon: '📄', color: '#3b82f6', bg: '#dbeafe' },
-    { code: 'GLASS',    label: 'Vidrio',    percentage: 50,  icon: '🪟', color: '#06b6d4', bg: '#cffafe' },
-    { code: 'WASTE',    label: 'Residuos',  percentage: 75,  icon: '🗑️', color: '#8b5cf6', bg: '#ede9fe' },
+    { code: 'GLASS',    label: 'Vidrio',    percentage: 50,  icon: '🪟', color: '#1dc74d', bg: '#cffed3' },
+    { code: 'WASTE',    label: 'Residuos',  percentage: 75,  icon: '🗑️', color: '#5a595c', bg: '#e1e0e8' },
     { code: 'HAZARD',   label: 'Peligroso', percentage: 20,  icon: '⚠️', color: '#ef4444', bg: '#fee2e2' },
 ];
 
