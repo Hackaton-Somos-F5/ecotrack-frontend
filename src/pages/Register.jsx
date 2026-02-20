@@ -117,7 +117,6 @@ function Register() {
       };
 
       login(formattedUser);
-      alert("¡Registro exitoso! 🎉 Bienvenido a EcoTrack.");
       navigate("/dashboard");
     } catch (error) {
       console.error("Error en registro:", error);

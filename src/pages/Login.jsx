@@ -60,7 +60,6 @@ function Login() {
             };
 
             login(userData);
-            alert(`✅ ¡Bienvenido ${response.colegio_nombre}! 👋`);
             navigate("/dashboard");
         } catch (error) {
             console.error("Error en login:", error);
