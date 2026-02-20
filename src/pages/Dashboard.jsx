@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import api from '../services/api';
 import WasteModal from '../components/WasteModal';
 import { useNavigate } from 'react-router-dom';
+import { FaPlus, FaHistory } from 'react-icons/fa';
 
 function WasteCard({ code, label, percentage, icon, color, bg }) {
     const isHigh = percentage >= 75;
@@ -92,10 +93,10 @@ function BottomControls({ onAddClick, onHistoryClick }) {
     return (
         <div className="bottomControls">
             <button className="bottomBtn bottomBtnPrimary" onClick={onAddClick}>
-                <span className="btnIcon">➕</span> Añadir residuo
+                <FaPlus className="btnIcon" /> Añadir residuo
             </button>
             <button className="bottomBtn bottomBtnSecondary" onClick={onHistoryClick}>
-                <span className="btnIcon">📋</span> Ver historial
+                <FaHistory className="btnIcon" /> Ver historial
             </button>
         </div>
     );

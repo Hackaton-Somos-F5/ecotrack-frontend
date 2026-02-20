@@ -92,17 +92,21 @@ export default function Residuos() {
         return coincideFiltro && coincideBusqueda;
     });
 
+    const totalKg = residuosFiltrados.reduce((sum, r) => sum + (r.peso_kg || 0), 0);
+    const totalRegistros = residuosFiltrados.length;
+
     if (loading) {
         return (
             <div className="residuosPage">
-                <div className="residuosTopBar glassEffect">
-                    <button className="backBtn" onClick={() => window.history.back()}>←</button>
-                    <h1 className="residuosTitle">Cargando...</h1>
-                </div>
-                <div className="residuosList">
-                    {[1, 2, 3, 4, 5, 6].map(i => (
-                        <div key={i} className="residuaCardSkeleton skeleton" />
-                    ))}
+                <div className="residuosMain">
+                    <div className="residuosTitleRow">
+                        <h1 className="residuosTitle">Cargando...</h1>
+                    </div>
+                    <div className="residuosList">
+                        {[1, 2, 3, 4, 5, 6].map(i => (
+                            <div key={i} className="residuaCardSkeleton skeleton" />
+                        ))}
+                    </div>
                 </div>
             </div>
         );
@@ -110,61 +114,74 @@ export default function Residuos() {
 
     return (
         <div className="residuosPage">
-            {/* Top bar */}
-            <div className="residuosTopBar glassEffect">
-                <button className="backBtn" onClick={() => window.history.back()}>←</button>
-                <h1 className="residuosTitle">Gestión de Residuos</h1>
-            </div>
-
-            {/* Buscador */}
-            <div className="searchBar glassEffect">
-                <span className="searchIcon">🔍</span>
-                <input
-                    type="text"
-                    placeholder="Buscar por aula o residuo..."
-                    value={busqueda}
-                    onChange={e => setBusqueda(e.target.value)}
-                />
-            </div>
-
-            {/* Filtros */}
-            <div className="filtrosBar">
-                {['Todos', ...categorias.map(c => c.label)].map(f => (
-                    <button
-                        key={f}
-                        className={`filtroBtn ${filtro === f ? 'filtroBtnActive' : ''}`}
-                        onClick={() => setFiltro(f)}
-                    >
-                        {f}
-                    </button>
-                ))}
-            </div>
-
-            {/* Lista */}
-            <div className="residuosList">
-                {residuosFiltrados.length === 0 ? (
-                    <div className="emptyState">
-                        <span>🗑️</span>
-                        <p>No hay residuos con ese filtro</p>
+            <main className="residuosMain">
+                {/* Title Row - Dashboard Style */}
+                <div className="residuosTitleRow">
+                    <div>
+                        <h1 className="residuosTitle">Historial de Residuos</h1>
+                        <p className="residuosSubtitle">{user?.nombre || 'Colegio'} · Listado completo</p>
                     </div>
-                ) : (
-                    residuosFiltrados.map(r => <ResiduoCard key={r.id} residuo={r} />)
-                )}
-            </div>
+                    <div className="residuosStats">
+                        <div className="residuosStatBox">
+                            <span className="residuosStatNum">{totalRegistros}</span>
+                            <span className="residuosStatLabel">Registros</span>
+                        </div>
+                        <div className="residuosStatBox">
+                            <span className="residuosStatNum">{totalKg.toFixed(1)}kg</span>
+                            <span className="residuosStatLabel">Total Peso</span>
+                        </div>
+                    </div>
+                </div>
 
-            {/* Botón flotante */}
-            <div className="fabContainer">
-                <button className="fabBtn" onClick={() => setModalAbierto(true)} aria-label="Añadir residuo">
-                    +
-                </button>
-            </div>
+                {/* Buscador */}
+                <div className="searchBar glassEffect">
+                    <span className="searchIcon">🔍</span>
+                    <input
+                        type="text"
+                        placeholder="Buscar por aula o residuo..."
+                        value={busqueda}
+                        onChange={e => setBusqueda(e.target.value)}
+                    />
+                </div>
 
-            {/* Modal */}
-            <WasteModal
-                isOpen={modalAbierto}
-                onClose={() => setModalAbierto(false)}
-                onSuccess={fetchData}
-            />
+                {/* Filtros */}
+                <div className="filtrosBar">
+                    {['Todos', ...categorias.map(c => c.label)].map(f => (
+                        <button
+                            key={f}
+                            className={`filtroBtn ${filtro === f ? 'filtroBtnActive' : ''}`}
+                            onClick={() => setFiltro(f)}
+                        >
+                            {f}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Lista */}
+                <div className="residuosList">
+                    {residuosFiltrados.length === 0 ? (
+                        <div className="emptyState">
+                            <span>🗑️</span>
+                            <p>No hay residuos con ese filtro</p>
+                        </div>
+                    ) : (
+                        residuosFiltrados.map(r => <ResiduoCard key={r.id} residuo={r} />)
+                    )}
+                </div>
+
+                {/* Botón flotante */}
+                <div className="fabContainer">
+                    <button className="fabBtn" onClick={() => setModalAbierto(true)} aria-label="Añadir residuo">
+                        +
+                    </button>
+                </div>
+
+                <WasteModal
+                    isOpen={modalAbierto}
+                    onClose={() => setModalAbierto(false)}
+                    onSuccess={fetchData}
+                />
+            </main>
         </div>
     );
 }

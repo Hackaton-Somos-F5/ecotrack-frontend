@@ -200,18 +200,28 @@
     max-width: 650px;
 }
 
+.heroTitle {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
 .heroTitle span {
     color: #00d23f;
     background: linear-gradient(to right, #00d23f, #c1ff72);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .heroSubtitle {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 45px;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 50px;
     line-height: 1.6;
+    max-width: 700px;
 }
 
 .heroCta {

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Header.css';
 import { useAuth } from '../../context/AuthContext';
+import { FaTrash, FaChartBar, FaSignOutAlt, FaUser, FaUserPlus } from 'react-icons/fa';
 
 export default function Header({ notificaciones = 1 }) {
     const { user, logout } = useAuth();
@@ -89,16 +90,16 @@ export default function Header({ notificaciones = 1 }) {
                                     <div className="dropdownDivider" />
                                     <p className="dropdownSection">Formularios</p>
                                     <button className="dropdownItem" onClick={() => handleNavegar('/wasteForm')}>
-                                        <span className="dropdownItemIcon">🗑️</span>
+                                        <FaTrash className="dropdownItemIcon" />
                                         <span>Gestión de Residuos</span>
                                     </button>
                                     <button className="dropdownItem" onClick={() => handleNavegar('/dashboard')}>
-                                        <span className="dropdownItemIcon">📊</span>
+                                        <FaChartBar className="dropdownItemIcon" />
                                         <span>Panel de Control</span>
                                     </button>
                                     <p className="dropdownSection">Cuenta</p>
                                     <button className="dropdownItem dropdownLogout" onClick={() => { logout(); navigate('/login'); }}>
-                                        <span className="dropdownItemIcon">🚪</span>
+                                        <FaSignOutAlt className="dropdownItemIcon" />
                                         <span>Cerrar sesión</span>
                                     </button>
                                 </>
@@ -111,11 +112,11 @@ export default function Header({ notificaciones = 1 }) {
                                     <div className="dropdownDivider" />
                                     <p className="dropdownSection">Cuenta</p>
                                     <button className="dropdownItem" onClick={() => handleNavegar('/login')}>
-                                        <span className="dropdownItemIcon">👤</span>
+                                        <FaUser className="dropdownItemIcon" />
                                         <span>Iniciar sesión</span>
                                     </button>
                                     <button className="dropdownItem" onClick={() => handleNavegar('/register')}>
-                                        <span className="dropdownItemIcon">📝</span>
+                                        <FaUserPlus className="dropdownItemIcon" />
                                         <span>Registrarse</span>
                                     </button>
                                 </>
