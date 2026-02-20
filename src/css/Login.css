@@ -1,47 +1,142 @@
-.login-container {
-  min-height: 80vh;
+.login-page-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: #f4f6f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+/* Background Decoration */
+.bg-decoration {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  animation: float 20s infinite alternate ease-in-out;
+}
+
+.circle-1 {
+  width: 400px;
+  height: 400px;
+  background: #00d23f;
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 300px;
+  height: 300px;
+  background: #00b837;
+  bottom: -50px;
+  right: -50px;
+  animation-delay: -5s;
+}
+
+.circle-3 {
+  width: 250px;
+  height: 250px;
+  background: #9be8b5;
+  top: 50%;
+  left: 60%;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, 50px) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-20px, -30px) scale(1);
+  }
+}
+
+/* Container & Card */
+.login-container {
+  position: relative;
+  z-index: 10;
+  width: 95%;
+  max-width: 600px;
+  padding: 20px;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  font-family: "Inter", sans-serif;
 }
 
-.login-container h1 {
-  font-size: 28px;
-  font-weight: 700;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card h1 {
+  font-size: 32px;
+  font-weight: 800;
   color: #1d2b1f;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
 }
 
-.login-container p {
-  font-size: 14px;
-  color: #6b6f6b;
-  margin-bottom: 30px;
+.login-card p {
+  font-size: 15px;
+  color: #555e55;
+  margin-bottom: 35px;
+  text-align: center;
 }
 
+/* Form Styling */
 .login-form {
   width: 100%;
-  max-width: 400px;
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .form-group {
+  margin-bottom: 22px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 18px;
 }
 
 .form-group label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: #1d2b1f;
+  margin-left: 4px;
 }
 
 .input-wrapper {
@@ -51,73 +146,78 @@
 
 .input-wrapper input {
   width: 100%;
-  padding: 14px 16px 14px 48px;
-  border: 1px solid #dcdcdc;
-  border-radius: 10px;
-  font-size: 15px;
-  background-color: #ffffff;
-  transition: 0.2s ease;
+  padding: 16px 16px 16px 52px;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  font-size: 16px;
+  color: #1d2b1f;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .input-wrapper input:focus {
   border-color: #00d23f;
-  box-shadow: 0 0 0 3px rgba(0, 210, 63, 0.1);
+  box-shadow: 0 0 0 4px rgba(0, 210, 63, 0.1);
   outline: none;
 }
 
 .input-icon {
   position: absolute;
   top: 50%;
-  left: 16px;
+  left: 18px;
   transform: translateY(-50%);
-  font-size: 16px;
-  color: #9ca3af;
-  pointer-events: none;
-  transition: 0.2s ease;
+  font-size: 18px;
+  color: #94a3b8;
+  transition: all 0.3s ease;
 }
 
-.input-wrapper:focus-within .input-icon {
+/* .input-wrapper:focus-within .input-icon {
   color: #00d23f;
-}
+  transform: translateY(-50%) scale(1.1);
+} */
 
 .error {
   font-size: 12px;
-  color: #e53935;
-  margin-top: 4px;
+  color: #dc2626;
+  margin-top: 6px;
+  margin-left: 4px;
+  font-weight: 500;
 }
 
-.server-error {
-  font-size: 13px;
-  color: #e53935;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
+/* Button & Redirect */
 .login-btn {
   width: 100%;
-  padding: 14px;
-  background-color: #00d23f;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
+  padding: 16px;
+  background: #00d23f;
   color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 10px;
+  box-shadow: 0 10px 20px rgba(0, 210, 63, 0.15);
 }
 
-.login-btn:hover {
-  background-color: #00b837;
+.login-btn:hover:not(:disabled) {
+  background: #00b837;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 24px rgba(0, 210, 63, 0.25);
+}
+
+.login-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .login-btn:disabled {
-  background-color: #9be8b5;
+  background: #94ecc3;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .register-redirect {
-  margin-top: 20px;
+  margin-top: 25px;
   font-size: 14px;
   color: #6b6f6b;
   text-align: center;
@@ -125,21 +225,54 @@
 
 .register-link {
   color: #00d23f;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  transition: 0.2s ease;
+  margin-left: 4px;
+  transition: color 0.2s ease;
 }
 
 .register-link:hover {
+  color: #00b837;
   text-decoration: underline;
 }
 
-@media (max-width: 480px) {
-  .login-form {
-    padding: 20px;
+/* Responsive */
+@media (max-width: 650px) {
+  .login-container {
+    width: 95%;
+    padding: 10px;
   }
 
-  .login-container h1 {
+  .login-card {
+    padding: 35px 25px;
+    border-radius: 20px;
+  }
+
+  .login-card h1 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page-wrapper {
+    padding: 10px;
+  }
+
+  .login-card {
+    padding: 30px 15px;
+  }
+
+  .login-card h1 {
     font-size: 24px;
+  }
+
+  .login-card p {
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+
+  .input-wrapper input {
+    padding: 14px 14px 14px 48px;
+    font-size: 15px;
   }
 }
