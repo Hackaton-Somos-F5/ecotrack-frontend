@@ -1,11 +1,14 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
-import Register from "../pages/Register";
-import { registerUser } from "../services/api";
+import Register from "../../pages/Register";
+import { colegios } from "../../services/api";
+import { AuthProvider } from "../../context/AuthContext";
 
-vi.mock("../services/api", () => ({
-  registerUser: vi.fn(),
+vi.mock("../../services/api", () => ({
+  colegios: {
+    register: vi.fn(),
+  },
 }));
 
 describe("Register Component", () => {
@@ -15,9 +18,11 @@ describe("Register Component", () => {
 
   const renderComponent = () => {
     return render(
-      <MemoryRouter>
-        <Register />
-      </MemoryRouter>,
+      <AuthProvider>
+        <MemoryRouter>
+          <Register />
+        </MemoryRouter>
+      </AuthProvider>,
     );
   };
 
@@ -41,7 +46,7 @@ describe("Register Component", () => {
       await screen.findByText("El nombre del colegio es obligatorio"),
     ).toBeInTheDocument();
     expect(screen.getByText("La dirección es obligatoria")).toBeInTheDocument();
-    expect(screen.getByText("Debes aceptar los términos")).toBeInTheDocument();
+    expect(screen.getByText("Debes aceptar los términos y condiciones")).toBeInTheDocument();
   });
 
   it("shows error if passwords do not match", async () => {
@@ -67,11 +72,11 @@ describe("Register Component", () => {
       target: { value: "test@test.com" },
     });
 
-    fireEvent.change(screen.getAllByPlaceholderText("******")[0], {
+    fireEvent.change(screen.getByPlaceholderText("Mínimo 8 caracteres"), {
       target: { value: "123456" },
     });
 
-    fireEvent.change(screen.getAllByPlaceholderText("******")[1], {
+    fireEvent.change(screen.getByPlaceholderText("Repite la contraseña"), {
       target: { value: "654321" },
     });
 
@@ -83,7 +88,7 @@ describe("Register Component", () => {
   });
 
   it("calls registerUser when form is valid", async () => {
-    registerUser.mockResolvedValue({});
+    colegios.register.mockResolvedValue({});
 
     renderComponent();
 
@@ -107,33 +112,33 @@ describe("Register Component", () => {
       target: { value: "test@test.com" },
     });
 
-    fireEvent.change(screen.getAllByPlaceholderText("******")[0], {
-      target: { value: "123456" },
+    fireEvent.change(screen.getByPlaceholderText("Mínimo 8 caracteres"), {
+      target: { value: "12345678" },
     });
 
-    fireEvent.change(screen.getAllByPlaceholderText("******")[1], {
-      target: { value: "123456" },
+    fireEvent.change(screen.getByPlaceholderText("Repite la contraseña"), {
+      target: { value: "12345678" },
     });
 
     fireEvent.click(screen.getByRole("checkbox"));
     fireEvent.click(screen.getByText("Registrarse"));
 
     await waitFor(() => {
-      expect(registerUser).toHaveBeenCalledTimes(1);
+      expect(colegios.register).toHaveBeenCalledTimes(1);
     });
 
-    expect(registerUser).toHaveBeenCalledWith({
+    expect(colegios.register).toHaveBeenCalledWith({
       nombre: "Colegio Test",
       direccion: "Calle Test",
       ciudad: "Barcelona",
       telefono: "600000000",
       email: "test@test.com",
-      password: "123456",
+      password: "12345678",
     });
   });
 
   it("shows server error when API fails", async () => {
-    registerUser.mockRejectedValue(new Error("Server error"));
+    colegios.register.mockRejectedValue(new Error("Error al registrar. Intenta nuevamente."));
 
     renderComponent();
 
@@ -157,19 +162,19 @@ describe("Register Component", () => {
       target: { value: "test@test.com" },
     });
 
-    fireEvent.change(screen.getAllByPlaceholderText("******")[0], {
-      target: { value: "123456" },
+    fireEvent.change(screen.getByPlaceholderText("Mínimo 8 caracteres"), {
+      target: { value: "12345678" },
     });
 
-    fireEvent.change(screen.getAllByPlaceholderText("******")[1], {
-      target: { value: "123456" },
+    fireEvent.change(screen.getByPlaceholderText("Repite la contraseña"), {
+      target: { value: "12345678" },
     });
 
     fireEvent.click(screen.getByRole("checkbox"));
     fireEvent.click(screen.getByText("Registrarse"));
 
     expect(
-      await screen.findByText("Error al registrar. Intenta nuevamente."),
+      await screen.findByText(/Error al registrar/i),
     ).toBeInTheDocument();
   });
 });
