@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { colegios } from "../services/api";
 import "../css/Register.css";
 import {
@@ -15,6 +15,13 @@ import { useAuth } from "../context/AuthContext";
 function Register() {
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -80,11 +87,9 @@ function Register() {
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    // Limpiar error del campo que se está editando
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-    // Limpiar error del servidor al editar cualquier campo
     if (serverError) {
       setServerError("");
     }
@@ -103,13 +108,9 @@ function Register() {
     setServerError("");
 
     try {
-      // Preparar datos (excluir campos del frontend que no van al backend)
       const { confirmPassword, acceptedTerms, ...dataToSend } = formData;
-      console.log("Enviando datos al backend:", dataToSend);
       const userData = await colegios.register(dataToSend);
-      console.log("Registro exitoso:", userData);
 
-      // Normalizamos la respuesta para el contexto (usualmente devuelve id y nombre)
       const formattedUser = {
         id: userData.id || userData.colegio_id,
         nombre: userData.nombre || userData.colegio_nombre,
@@ -127,181 +128,187 @@ function Register() {
   };
 
   return (
-    <div className="register-container">
-      <h1>Crea tu cuenta</h1>
-      <p>Registra tu colegio y comienza a monitorear residuos</p>
+    <div className="register-page-wrapper">
+      <div className="bg-decoration">
+        <div className="circle circle-1"></div>
+        <div className="circle circle-2"></div>
+        <div className="circle circle-3"></div>
+      </div>
 
-      <form onSubmit={handleSubmit} noValidate>
-        <h3>Datos del colegio</h3>
+      <div className="register-container">
+        <div className="register-card">
+          <h1>Crea tu cuenta</h1>
+          <p>Registra tu colegio y comienza a monitorear residuos<Link to="/" className="register-link">o volver al inicio</Link></p>
 
-        <div className="form-group">
-          <label>Nombre del colegio *</label>
-          <div className="input-wrapper">
-            <FaSchool className="input-icon" />
-            <input
-              type="text"
-              name="nombre"
-              placeholder="Ej. Colegio Verde"
-              value={formData.nombre}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          {errors.nombre && <span className="error">{errors.nombre}</span>}
+          <form className="register-form" onSubmit={handleSubmit} noValidate>
+            <div className="form-scroll-area">
+              <div className="form-section">
+                <h3>Datos del colegio</h3>
+
+                <div className="form-group">
+                  <label>Nombre del colegio *</label>
+                  <div className="input-wrapper">
+                    <FaSchool className="input-icon" />
+                    <input
+                      type="text"
+                      name="nombre"
+                      placeholder="Ej. Colegio Verde"
+                      value={formData.nombre}
+                      onChange={handleChange}
+                      disabled={loading}
+                    />
+                  </div>
+                  {errors.nombre && <span className="error">{errors.nombre}</span>}
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Dirección *</label>
+                    <div className="input-wrapper">
+                      <FaMapMarkerAlt className="input-icon" />
+                      <input
+                        type="text"
+                        name="direccion"
+                        placeholder="Calle Ejemplo 123"
+                        value={formData.direccion}
+                        onChange={handleChange}
+                        disabled={loading}
+                      />
+                    </div>
+                    {errors.direccion && <span className="error">{errors.direccion}</span>}
+                  </div>
+
+                  <div className="form-group">
+                    <label>Ciudad *</label>
+                    <div className="input-wrapper">
+                      <FaCity className="input-icon" />
+                      <input
+                        type="text"
+                        name="ciudad"
+                        placeholder="Barcelona"
+                        value={formData.ciudad}
+                        onChange={handleChange}
+                        disabled={loading}
+                      />
+                    </div>
+                    {errors.ciudad && <span className="error">{errors.ciudad}</span>}
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label>Teléfono *</label>
+                  <div className="input-wrapper">
+                    <FaPhone className="input-icon" />
+                    <input
+                      type="tel"
+                      name="telefono"
+                      placeholder="+34 600 000 000"
+                      value={formData.telefono}
+                      onChange={handleChange}
+                      disabled={loading}
+                    />
+                  </div>
+                  {errors.telefono && <span className="error">{errors.telefono}</span>}
+                </div>
+              </div>
+
+              <div className="form-divider"></div>
+
+              <div className="form-section">
+                <h3>Datos de acceso</h3>
+
+                <div className="form-group">
+                  <label>Correo electrónico *</label>
+                  <div className="input-wrapper">
+                    <FaEnvelope className="input-icon" />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="ejemplo@correo.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      disabled={loading}
+                    />
+                  </div>
+                  {errors.email && <span className="error">{errors.email}</span>}
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Contraseña *</label>
+                    <div className="input-wrapper">
+                      <FaLock className="input-icon" />
+                      <input
+                        type="password"
+                        name="password"
+                        placeholder="Mínimo 8 caracteres"
+                        value={formData.password}
+                        onChange={handleChange}
+                        disabled={loading}
+                      />
+                    </div>
+                    {errors.password && <span className="error">{errors.password}</span>}
+                  </div>
+
+                  <div className="form-group">
+                    <label>Confirmar contraseña *</label>
+                    <div className="input-wrapper">
+                      <FaLock className="input-icon" />
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Repite la contraseña"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        disabled={loading}
+                      />
+                    </div>
+                    {errors.confirmPassword && (
+                      <span className="error">{errors.confirmPassword}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="checkbox-section">
+              <div className="checkbox-group">
+                <input
+                  type="checkbox"
+                  name="acceptedTerms"
+                  id="acceptedTerms"
+                  checked={formData.acceptedTerms}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+                <label htmlFor="acceptedTerms">
+                  Acepto los <span className="link">términos y condiciones</span>
+                </label>
+              </div>
+              {errors.acceptedTerms && (
+                <span className="error">{errors.acceptedTerms}</span>
+              )}
+            </div>
+
+            {serverError && (
+              <div className="server-error">
+                ❌ {serverError}
+              </div>
+            )}
+
+            <button type="submit" className="register-btn" disabled={loading}>
+              {loading ? "⏳ Registrando..." : "Crear cuenta"}
+            </button>
+
+            <p className="login-redirect">
+              ¿Ya tienes cuenta? {" "}
+              <Link to="/login" className="login-link">
+                Inicia sesión
+              </Link>
+            </p>
+          </form>
         </div>
-
-        <div className="form-group">
-          <label>Dirección *</label>
-          <div className="input-wrapper">
-            <FaMapMarkerAlt className="input-icon" />
-            <input
-              type="text"
-              name="direccion"
-              placeholder="Calle Ejemplo 123"
-              value={formData.direccion}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          {errors.direccion && <span className="error">{errors.direccion}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Ciudad *</label>
-          <div className="input-wrapper">
-            <FaCity className="input-icon" />
-            <input
-              type="text"
-              name="ciudad"
-              placeholder="Barcelona"
-              value={formData.ciudad}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          {errors.ciudad && <span className="error">{errors.ciudad}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Teléfono *</label>
-          <div className="input-wrapper">
-            <FaPhone className="input-icon" />
-            <input
-              type="tel"
-              name="telefono"
-              placeholder="+34 600 000 000"
-              value={formData.telefono}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          {errors.telefono && <span className="error">{errors.telefono}</span>}
-        </div>
-
-        <h3>Datos de acceso</h3>
-
-        <div className="form-group">
-          <label>Correo electrónico *</label>
-          <div className="input-wrapper">
-            <FaEnvelope className="input-icon" />
-            <input
-              type="email"
-              name="email"
-              placeholder="ejemplo@correo.com"
-              value={formData.email}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Contraseña *</label>
-          <div className="input-wrapper">
-            <FaLock className="input-icon" />
-            <input
-              type="password"
-              name="password"
-              placeholder="Mínimo 8 caracteres"
-              value={formData.password}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          {errors.password && <span className="error">{errors.password}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Confirmar contraseña *</label>
-          <div className="input-wrapper">
-            <FaLock className="input-icon" />
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Repite la contraseña"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          {errors.confirmPassword && (
-            <span className="error">{errors.confirmPassword}</span>
-          )}
-        </div>
-
-        <div className="checkbox-group">
-          <input
-            type="checkbox"
-            name="acceptedTerms"
-            id="acceptedTerms"
-            checked={formData.acceptedTerms}
-            onChange={handleChange}
-            disabled={loading}
-          />
-          <label htmlFor="acceptedTerms">
-            Acepto los <span className="link">términos y condiciones</span> así
-            como las políticas de privacidad *
-          </label>
-        </div>
-        {errors.acceptedTerms && (
-          <span className="error">{errors.acceptedTerms}</span>
-        )}
-
-        {serverError && (
-          <div
-            className="server-error"
-            style={{
-              color: "#dc2626",
-              background: "#fee2e2",
-              padding: "12px",
-              borderRadius: "8px",
-              marginBottom: "15px",
-              fontSize: "14px",
-            }}
-          >
-            ❌ {serverError}
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            opacity: loading ? 0.7 : 1,
-            cursor: loading ? "not-allowed" : "pointer",
-          }}
-        >
-          {loading ? "⏳ Registrando..." : "Registrarse"}
-        </button>
-
-        <p className="login-redirect">
-          ¿Ya tienes cuenta?{" "}
-          <Link to="/login" className="login-link">
-            Inicia sesión
-          </Link>
-        </p>
-      </form>
+      </div>
     </div>
   );
 }
